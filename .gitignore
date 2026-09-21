@@ -1,0 +1,32 @@
+# generated with git
+
+# Add all relevant files
+ml/
+albert-base-v2/
+# Packaging and tooling
+README.md
+.gitignore
+
+# Anything that could grow large or is unnecessary to version control
+# langchain
+# openai
+# hub
+
+# Temporary build artifacts
+build/
+temp/
+
+# Model checkpoints and weights (do not track in repo)
+**/tf_model.h5
+**/pytorch_model.bin
+**/torch_model.bin
+**/model.safetensors
+**/flax_model.msgpack
+**/rust_model.ot
+
+# Byte‑code, intermediate files
+*.pyc
+__pycache__/
+
+# Python virtual environments
+.venv/

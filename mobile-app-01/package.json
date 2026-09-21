@@ -1,0 +1,27 @@
+{
+  "name": "mobile-app-01",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "dependencies": {
+    "@expo/ngrok": "^4.1.0",
+    "expo": "~57.0.24",
+    "expo-dev-client": "~57.0.19",
+    "expo-sqlite": "~57.0.3",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "type-check": "tsc --noEmit",
+    "test": "tsc src/engine/types.ts src/engine/interventionEngine.ts src/engine/recoveryEngine.ts src/engine/testRecoveryEngine.ts --ignoreConfig --outDir .engine-test-build --module commonjs --target es2019 --strict --skipLibCheck && node .engine-test-build/testRecoveryEngine.js"
+  },
+  "private": true
+}
