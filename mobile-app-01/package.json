@@ -5,23 +5,26 @@
   "dependencies": {
     "@expo/ngrok": "^4.1.0",
     "expo": "~57.0.24",
+    "expo-asset": "~57.0.18",
     "expo-dev-client": "~57.0.19",
     "expo-sqlite": "~57.0.3",
     "expo-status-bar": "~57.0.1",
+    "onnxruntime-react-native": "^1.24.3",
     "react": "19.2.3",
     "react-native": "0.86.3"
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
-    "typescript": "~6.0.3"
+    "patch-package": "^8.0.1"
   },
-  "scripts": {
-    "start": "expo start",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web",
-    "type-check": "tsc --noEmit",
-    "test": "tsc src/engine/types.ts src/engine/interventionEngine.ts src/engine/recoveryEngine.ts src/engine/testRecoveryEngine.ts --ignoreConfig --outDir .engine-test-build --module commonjs --target es2019 --strict --skipLibCheck && node .engine-test-build/testRecoveryEngine.js"
-  },
+"scripts": {
+  "start": "expo start",
+  "android": "expo run:android",
+  "ios": "expo run:ios",
+  "web": "expo start --web",
+  "type-check": "tsc --noEmit",
+  "test": "tsc src/engine/types.ts src/engine/interventionEngine.ts src/engine/recoveryEngine.ts src/engine/testRecoveryEngine.ts src/engine/patternEngine.ts src/engine/testPatternEngine.ts src/screens/checkInModel.ts src/screens/urgeModel.ts src/screens/insightsModel.ts src/services/privacyFilter.ts src/services/signalPipeline.ts src/services/testPrivacyPipeline.ts src/ml/albertTokenizer.ts src/ml/triggerClassifier.ts src/ml/mlRuntime.ts src/ml/signalIngestion.ts src/ml/testTokenizerVocab.ts src/ml/testTokenizerCharsmap.ts src/ml/testTokenizerFixtures.ts src/ml/testAlbertTokenizer.ts src/ml/testTriggerClassifier.ts --ignoreConfig --outDir .engine-test-build --module commonjs --target es2019 --strict --skipLibCheck && node .engine-test-build/engine/testRecoveryEngine.js && node .engine-test-build/engine/testPatternEngine.js && node .engine-test-build/services/testPrivacyPipeline.js && node .engine-test-build/ml/testAlbertTokenizer.js && node .engine-test-build/ml/testTriggerClassifier.js",
+  "postinstall": "patch-package",
   "private": true
+}
 }

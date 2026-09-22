@@ -3,6 +3,8 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-
 
 import { loadRecentUrgeEvents, saveUrgeEvent, saveUrgeOutcome } from '../database/urgeRepository';
 import type { PersistenceResult } from '../database/urgeRepository';
+import { saveMlSignalObservation } from '../database/signalRepository';
+import { ingestUserText } from '../ml/signalIngestion';
 import { getIntervention } from '../engine/interventionEngine';
 import { calculateRecoveryState } from '../engine/recoveryEngine';
 import type { RecoveryResult } from '../engine/types';
@@ -102,6 +104,9 @@ export default function UrgeScreen({ latestCheckIn, onBack }: UrgeScreenProps) {
   const [historyError, setHistoryError] = useState<string | null>(null);
   const [saveStatus, setSaveStatus] = useState<PersistenceResult | null>(null);
   const [outcomeSaveStatus, setOutcomeSaveStatus] = useState<PersistenceResult | null>(null);
+  // One-line honest status for what the local ML pass did with this capture's
+  // text. Null until the first capture; never blocks the flow itself.
+  const [mlNote, setMlNote] = useState<string | null>(null);
 
   // Load earlier episodes once, so past urges count toward the recent signals.
   // Newly captured ones are appended below, so nothing is counted twice.
@@ -129,6 +134,36 @@ export default function UrgeScreen({ latestCheckIn, onBack }: UrgeScreenProps) {
     setEarlierEvents((previous) => [...previous, created]);
     setSaveStatus(saveUrgeEvent(created));
     setStage('intervention');
+
+    // Fire-and-forget local ML pass on the text the user just typed. It never
+    // blocks or alters the intervention flow; failures become a one-line note.
+    const mlText = [context, feeling].filter((part) => part.trim().length > 0).join(' ');
+    if (mlText.length > 0) {
+      void ingestUserText({
+        text: mlText,
+        originSource: 'urge_flow',
+        timestamp: Date.now(),
+        store: saveMlSignalObservation,
+      })
+        .then((ingest) => {
+          if (!ingest.accepted) {
+            setMlNote(`ML signal not recorded: ${ingest.reason ?? 'rejected by the privacy filter'}.`);
+          } else if (!ingest.classified) {
+            setMlNote(`ML signal not recorded: ${ingest.reason ?? 'local model unavailable'}.`);
+          } else if (ingest.signals.length === 0) {
+            setMlNote('Local model ran; no signal reached its threshold, so nothing was recorded.');
+          } else {
+            setMlNote(
+              `Local model recorded ${ingest.stored} signal(s): ${ingest.signals
+                .map((signal) => `${signal.label} ${Math.round(signal.confidence * 100)}%`)
+                .join(', ')}. Seen later in Insights.`,
+            );
+          }
+        })
+        .catch(() => {
+          setMlNote('ML signal not recorded: unexpected local error.');
+        });
+    }
   }
 
   function handleRecheck() {
@@ -247,6 +282,7 @@ export default function UrgeScreen({ latestCheckIn, onBack }: UrgeScreenProps) {
           </Pressable>
 
           <PersistenceNote result={saveStatus} what="Urge" />
+          {mlNote ? <Text style={styles.mlNote}>{mlNote}</Text> : null}
         </View>
       ) : null}
 
@@ -457,6 +493,12 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginTop: 12,
     fontStyle: 'italic',
+  },
+  mlNote: {
+    color: '#7c8da3',
+    fontSize: 12,
+    lineHeight: 18,
+    marginTop: 8,
   },
   persistenceNote: {
     fontSize: 12,

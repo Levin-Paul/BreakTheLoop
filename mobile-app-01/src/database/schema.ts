@@ -6,6 +6,7 @@
 import { CHECK_INS_TABLE } from './checkInPersistence';
 import db from './db';
 import { initializeTableStatements } from './schemaStatements';
+import { CREATE_ML_SIGNAL_EVENTS_TABLE_SQL, ML_SIGNAL_EVENTS_TABLE } from './signalPersistence';
 import { URGE_EVENTS_TABLE } from './urgePersistence';
 
 /** Result of setting up the local database. */
@@ -53,6 +54,10 @@ export function initializeDatabase(): DatabaseInitResult {
     for (const statement of initializeTableStatements(columnNames(URGE_EVENTS_TABLE))) {
       db.execSync(statement);
     }
+    // The ML signal table ships with the ML integration pass; a dev device that
+    // initialized its database before it existed needs the CREATE IF NOT EXISTS
+    // here, and the statement is a no-op for fresh installs.
+    db.execSync(CREATE_ML_SIGNAL_EVENTS_TABLE_SQL);
     initialized = true;
     return { ok: true };
   } catch (error) {
@@ -61,7 +66,7 @@ export function initializeDatabase(): DatabaseInitResult {
 }
 
 /** Tables this app stores data in. */
-export const LOCAL_TABLES = [CHECK_INS_TABLE, URGE_EVENTS_TABLE] as const;
+export const LOCAL_TABLES = [CHECK_INS_TABLE, URGE_EVENTS_TABLE, ML_SIGNAL_EVENTS_TABLE] as const;
 
 /**
  * Called by every repository before it runs a statement. Throws when the
