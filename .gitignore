@@ -1,7 +1,11 @@
 # generated with git
 
 # Add all relevant files
-ml/
+# Anchored to the repo root: only the Python training directory is ignored.
+# Without the leading slash this pattern also matched the mobile app's own
+# src/ml/ and assets/ml/ (tokenizer, classifier adapter, ONNX model), which
+# must be versioned — see commit 9690b3c's missing ML layer.
+/ml/
 albert-base-v2/
 # Packaging and tooling
 README.md
