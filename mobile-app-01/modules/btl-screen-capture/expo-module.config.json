@@ -1,0 +1,6 @@
+{
+  "platforms": ["android"],
+  "android": {
+    "modules": ["com.levin197.mobileapp01.screencapture.BtlScreenCaptureModule"]
+  }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Manifest additions for the local screen-capture module.
+
+  Security review (deliberately minimal set):
+  - FOREGROUND_SERVICE + FOREGROUND_SERVICE_MEDIA_PROJECTION: required by
+    Android 14+ (targetSdk 34+) to run the one-frame capture inside a
+    mediaProjection-typed foreground service. Both are normal permissions,
+    granted at install, not revocable by the user, and expose nothing by
+    themselves.
+  - POST_NOTIFICATIONS: the foreground service must show a notification.
+    Without it the notification is silently dropped on API 33+ and the FGS
+    can be killed. Runtime request happens only for the test screen.
+  - No SYSTEM_ALERT_WINDOW, no accessibility, no storage, no camera, no
+    microphone, no INTERNET additions, no background-capture tricks.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+  <application>
+    <service
+      android:name="com.levin197.mobileapp01.screencapture.ScreenCaptureService"
+      android:exported="false"
+      android:foregroundServiceType="mediaProjection" />
+  </application>
+</manifest>

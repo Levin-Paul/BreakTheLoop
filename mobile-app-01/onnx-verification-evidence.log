@@ -1,0 +1,13 @@
+=== ONNX verification evidence — captured 2026-09-27 02:05 ===
+
+--- logcat ReactNativeJS (app init + run) ---
+09-27 01:41:25.141  7036  7305 I ReactNativeJS: Running "main" with {"rootTag":1,"initialProps":{},"fabric":true}
+09-27 01:41:30.359  7036  7305 I ReactNativeJS: [ml] trigger classifier ready
+09-27 01:44:36.266  7036  7470 I ReactNativeJS: Running "main" with {"rootTag":1,"initialProps":{},"fabric":true}
+09-27 01:44:39.093  7036  7470 I ReactNativeJS: [ml] trigger classifier ready
+09-27 01:52:51.019  8022  8070 I ReactNativeJS: Running "main" with {"rootTag":1,"initialProps":{},"fabric":true}
+09-27 01:52:55.044  8022  8070 I ReactNativeJS: [ml] trigger classifier ready
+
+--- failure-signature counts (must be 0) ---
+runtime not ready: 0
+install' of null: 0

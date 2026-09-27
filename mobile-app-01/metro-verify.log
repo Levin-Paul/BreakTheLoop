@@ -1,0 +1,39 @@
+Starting project at C:\Users\admin\Documents\BreakTheLoop\mobile-app-01
+Logs: C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\.expo\dev\logs\start.log
+Starting Metro Bundler
+
+Waiting on http://localhost:8081
+
+An update for expo is available: 57.0.24 → ~57.0.25
+0 other packages may need updating. Run npx expo install --check for details.
+Logs for your project will appear below.
+Android Bundled 14289ms index.ts (793 modules)
+ WARN  [ml] trigger classifier unavailable: ONNX trigger classifier failed to initialize: Call to function 'ExpoAsset.downloadAsync' has been rejected.
+→ Caused by: Unable to download asset from url: http://10.0.2.2:8081/assets/?unstable_path=.%2Fassets%2Fml/trigger-classifier.int8.onnx?platform=android&hash=637d8da201d7c34b733ef6e9ececd313
+Android Bundled 75ms index.ts (1 module)
+ WARN  [ml] trigger classifier unavailable: ONNX trigger classifier failed to initialize: Call to function 'ExpoAsset.downloadAsync' has been rejected.
+→ Caused by: Unable to download asset from url: http://10.0.2.2:8081/assets/?unstable_path=.%2Fassets%2Fml/trigger-classifier.int8.onnx?platform=android&hash=637d8da201d7c34b733ef6e9ececd313
+Android Bundled 58ms index.ts (1 module)
+ WARN  [ml] trigger classifier unavailable: ONNX trigger classifier failed to initialize: Call to function 'ExpoAsset.downloadAsync' has been rejected.
+→ Caused by: Unable to download asset from url: http://10.0.2.2:8081/assets/?unstable_path=.%2Fassets%2Fml/trigger-classifier.int8.onnx?platform=android&hash=637d8da201d7c34b733ef6e9ececd313
+Android Bundled 1087ms index.ts (1 module)
+ WARN  [ml] trigger classifier unavailable: ONNX trigger classifier failed to initialize: Call to function 'ExpoAsset.downloadAsync' has been rejected.
+→ Caused by: Unable to download asset from url: http://10.0.2.2:8081/assets/?unstable_path=.%2Fassets%2Fml/trigger-classifier.int8.onnx?platform=android&hash=637d8da201d7c34b733ef6e9ececd313
+Android Bundled 152ms index.ts (1 module)
+Android Bundled 133ms index.ts (1 module)
+ WARN  [ml] trigger classifier unavailable: ONNX trigger classifier failed to initialize: Call to function 'ExpoAsset.downloadAsync' has been rejected.
+→ Caused by: Unable to download asset from url: http://10.0.2.2:8081/assets/?unstable_path=.%2Fassets%2Fml/trigger-classifier.int8.onnx?platform=android&hash=637d8da201d7c34b733ef6e9ececd313
+Android Bundled 36ms index.ts (1 module)
+ LOG  [ml] trigger classifier ready
+Android Bundled 2389ms index.ts (1 module)
+ LOG  [ml] trigger classifier ready
+Android Bundled 56ms index.ts (1 module)
+ LOG  [ml] trigger classifier ready
+Android Bundled 894ms index.ts (1 module)
+ LOG  [ml] trigger classifier ready
+C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\.expo\dev\logs\start.log
+› Port 8081 is being used by another process
+Input is required, but 'npx expo' is in non-interactive mode.
+Required input:
+> Use port 8082 instead?
+› Skipping dev server

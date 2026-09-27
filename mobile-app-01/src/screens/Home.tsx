@@ -9,6 +9,8 @@ interface HomeScreenProps {
   onStartUrge: () => void;
   /** Navigates to the Insights screen. */
   onOpenInsights: () => void;
+  /** Navigates to the development-only screen-capture test screen. */
+  onOpenScreenCaptureTest: () => void;
 }
 
 export default function HomeScreen({
@@ -16,6 +18,7 @@ export default function HomeScreen({
   onStartCheckIn,
   onStartUrge,
   onOpenInsights,
+  onOpenScreenCaptureTest,
 }: HomeScreenProps) {
   return (
     <View style={styles.screen}>
@@ -46,6 +49,14 @@ export default function HomeScreen({
         accessibilityLabel="Open insights"
         style={styles.secondaryButton}>
         <Text style={styles.secondaryButtonText}>Insights</Text>
+      </Pressable>
+
+      <Pressable
+        onPress={onOpenScreenCaptureTest}
+        accessibilityRole="button"
+        accessibilityLabel="Open screen capture development test"
+        style={styles.devButton}>
+        <Text style={styles.secondaryButtonText}>{'Screen Capture Test \u2014 dev'}</Text>
       </Pressable>
 
       <Text style={styles.footnote}>
@@ -118,6 +129,14 @@ const styles = StyleSheet.create({
     color: '#e2e8f0',
     fontSize: 15,
     fontWeight: '600',
+  },
+  devButton: {
+    backgroundColor: '#1a2531',
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    alignItems: 'center',
+    marginTop: 10,
   },
   footnote: {
     color: '#7c8da3',

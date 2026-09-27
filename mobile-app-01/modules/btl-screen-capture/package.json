@@ -1,0 +1,6 @@
+{
+  "name": "btl-screen-capture",
+  "version": "1.0.0",
+  "description": "BreakTheLoop local MediaProjection screen-capture foundation (single ephemeral frame, metadata only).",
+  "private": true
+}

@@ -5,13 +5,16 @@ import { initializeDatabase } from './src/database/schema';
 import CheckInScreen from './src/screens/CheckIn';
 import HomeScreen from './src/screens/Home';
 import InsightsScreen from './src/screens/Insights';
+import ScreenCaptureTestScreen from './src/screens/ScreenCaptureTest';
 import UrgeScreen from './src/screens/Urge';
 import type { CheckIn } from './src/screens/checkInModel';
 
 // No navigation library is installed (expo-router / react-navigation would be a
 // new dependency), so the screens are switched with a single piece of app-level
 // state instead.
-type Screen = 'home' | 'checkIn' | 'urge' | 'insights';
+// 'screenCaptureTest' is a development-only milestone screen (MediaProjection
+// foundation); it is clearly labelled inside the screen itself.
+type Screen = 'home' | 'checkIn' | 'urge' | 'insights' | 'screenCaptureTest';
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('home');
@@ -41,12 +44,16 @@ export default function App() {
     if (screen === 'insights') {
       return <InsightsScreen onBack={() => setScreen('home')} />;
     }
+    if (screen === 'screenCaptureTest') {
+      return <ScreenCaptureTestScreen onBack={() => setScreen('home')} />;
+    }
     return (
       <HomeScreen
         checkInCount={checkIns.length}
         onStartCheckIn={() => setScreen('checkIn')}
         onStartUrge={() => setScreen('urge')}
         onOpenInsights={() => setScreen('insights')}
+        onOpenScreenCaptureTest={() => setScreen('screenCaptureTest')}
       />
     );
   }
