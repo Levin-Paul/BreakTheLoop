@@ -15,12 +15,14 @@ import {
   type DetectedPattern,
 } from '../engine/patternEngine';
 import { countMlSignalObservations, loadRecentMlSignals } from '../database/signalRepository';
+import { getModelRuntimeStatus, type ModelRuntimeStatus } from '../ml/modelStatus';
 import {
   PATTERN_HISTORY_LIMIT,
   PATTERN_STATUS_LABELS,
   RECENT_ACTIVITY_LIMIT,
   buildMlSignalSummaries,
   buildRecentActivity,
+  buildModelStatusLines,
   formatConfidence,
   formatDateRange,
   formatStoredTimestamp,
@@ -42,6 +44,7 @@ interface InsightsState {
   activity: ActivityEntry[];
   patterns: DetectedPattern[];
   mlSummaries: ReturnType<typeof buildMlSignalSummaries>;
+  modelStatus: ModelRuntimeStatus;
 }
 
 const EMPTY: Omit<InsightsState, 'status' | 'error'> = {
@@ -52,6 +55,7 @@ const EMPTY: Omit<InsightsState, 'status' | 'error'> = {
   activity: [],
   patterns: [],
   mlSummaries: [],
+  modelStatus: getModelRuntimeStatus(),
 };
 
 export default function InsightsScreen({ onBack }: InsightsScreenProps) {
@@ -104,6 +108,8 @@ export default function InsightsScreen({ onBack }: InsightsScreenProps) {
       // ML-derived signals come from their own table and are summarized with
       // the same counting rules — no invention, no causal wording.
       mlSummaries: buildMlSignalSummaries(summarizeMlSignals(mlSignalHistory.events)),
+      // Honest projection of whether a real ONNX session is bound right now.
+      modelStatus: getModelRuntimeStatus(),
     });
   }
 
@@ -148,6 +154,33 @@ export default function InsightsScreen({ onBack }: InsightsScreenProps) {
         <Text style={styles.countNote}>
           Interventions counts urge episodes carried through a recheck, so it stays 0 for urges that
           were never rechecked.
+        </Text>
+      </View>
+
+      <Text style={styles.sectionTitle}>Local AI</Text>
+      <View style={styles.card}>
+        <View style={styles.modelStatusHeader}>
+          <View
+            style={
+              state.modelStatus.available ? styles.statusDotReady : styles.statusDotUnavailable
+            }
+          />
+          <Text style={styles.modelStatusTitle}>
+            {state.modelStatus.available ? 'Ready' : 'Unavailable'}
+          </Text>
+        </View>
+        {buildModelStatusLines(state.modelStatus).map((line) => (
+          <View key={line.label} style={styles.countRow}>
+            <Text style={styles.countLabel}>{line.label}:</Text>
+            <Text style={styles.modelStatusValue}>{line.value}</Text>
+          </View>
+        ))}
+        {state.modelStatus.error ? (
+          <Text style={styles.modelStatusError}>{state.modelStatus.error}</Text>
+        ) : null}
+        <Text style={styles.countNote}>
+          Runs entirely on this device, offline. It only knows the labels listed above — it is not a
+          complete addiction or trigger detector, and it does not read your screen.
         </Text>
       </View>
 
@@ -315,6 +348,44 @@ const styles = StyleSheet.create({
     color: '#7dd3fc',
     fontSize: 22,
     fontWeight: '700',
+  },
+  modelStatusHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  statusDotReady: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#4ade80',
+    marginRight: 8,
+  },
+  statusDotUnavailable: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#f87171',
+    marginRight: 8,
+  },
+  modelStatusTitle: {
+    color: '#f8fafc',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  modelStatusValue: {
+    color: '#7dd3fc',
+    fontSize: 14,
+    fontWeight: '600',
+    textAlign: 'right',
+    flexShrink: 1,
+    marginLeft: 12,
+  },
+  modelStatusError: {
+    color: '#fca5a5',
+    fontSize: 12,
+    lineHeight: 17,
+    marginTop: 8,
   },
   countNote: {
     color: '#7c8da3',

@@ -1,0 +1,249 @@
+INFO         | Android emulator version 35.5.10.0 (build_id 13402964) (CL:N/A)
+INFO         | Graphics backend: gfxstream
+INFO         | Found systemPath C:\Users\admin\AppData\Local\Android\Sdk\system-images\android-36\google_apis_playstore\x86_64\
+I0927 12:58:17.962190   27464 opengles.cpp:285] android_startOpenglesRenderer: gpu info
+I0927 12:58:17.962339   27464 opengles.cpp:286] GPU #1
+  Make: 10de
+  Model: NVIDIA GeForce MX550
+  Device ID: 1f9f
+
+WARNING      | Please update the emulator to one that supports the feature(s): VulkanVirtualQueue
+INFO         | IPv4 server found: 192.168.1.1
+INFO         | Ignore IPv6 address: 20d6:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 20d6:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 20d6:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 38dc:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 38dc:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 38dc:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 50e2:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 50e2:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 88ec:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 88ec:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Ignore IPv6 address: 88ec:363a:9b02:0:b0d0:363a:9b02:0
+INFO         | Checking system compatibility:
+INFO         |   Checking: hasCompatibleHypervisor
+INFO         |      Ok: Hypervisor compatibility to run avd: `Medium_Phone` are met
+INFO         |   Checking: hasSufficientSystem
+INFO         |      Ok: System requirements to run avd: `Medium_Phone` are met
+INFO         |   Checking: hasSufficientHwGpu
+INFO         |      Ok: Hardware GPU requirements to run avd: `Medium_Phone` are passed
+INFO         |   Checking: hasSufficientDiskSpace
+INFO         |      Ok: Disk space requirements to run avd: `Medium_Phone` are met
+INFO         | Critical: Failed to load opengl32sw (The specified module could not be found.) (:0, )
+INFO         | Warning: Software OpenGL failed. Falling back to system OpenGL. (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_btn_xr_environment_living_room_day_clicked() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_btn_xr_environment_living_room_night_clicked() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_new_posture_requested(int) (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_posture_selection_dialog() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_new_resizable_requested(PresetEmulatorSizeType) (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_resizable_dialog() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_xr_environment_mode_changed(int) (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_xr_environment_mode_dialog() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_xr_input_mode_changed(int) (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_dismiss_xr_input_mode_dialog() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_sleep_timer_done() (:0, )
+INFO         | Warning: QMetaObject::connectSlotsByName: No matching signal for on_unfold_timer_done() (:0, )
+INFO         | Storing crashdata in: C:\Users\admin\AppData\Local\Temp\\AndroidEmulator\emu-crash-35.5.10.db, detection is enabled for process: 3944
+INFO         | Guest Driver: Auto (ext controls)
+library_mode host gpu mode host
+INFO         | emuglConfig_get_vulkan_hardware_gpu_support_info: Found physical GPU 'NVIDIA GeForce MX550', type: VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU, apiVersion: 1.4.329, driverVersion: 595.95
+
+INFO         | emuglConfig_get_vulkan_hardware_gpu_support_info: Found physical GPU 'Intel(R) Iris(R) Xe Graphics', type: VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU, apiVersion: 1.4.323, driverVersion: 0.405.2988
+
+INFO         | GPU device local memory = 2119MB
+INFO         | Initializing hardware OpenGLES emulation support
+INFO         | HealthMonitor disabled.
+INFO         | SharedLibrary::open for [vulkan-1.dll]
+
+INFO         | SharedLibrary::open for [vulkan-1.dll]: not found in map, open for the first time
+
+INFO I0927 12:58:18.205586   27464 userspace-boot-properties.cpp:741] Userspace boot properties:
+I0927 12:58:18.205607   27464 userspace-boot-properties.cpp:745]   androidboot.boot_devices=pci0000:00/0000:00:03.0 pci0000:00/0000:00:06.0
+I0927 12:58:18.205611   27464 userspace-boot-properties.cpp:745]   androidboot.dalvik.vm.heapsize=512m
+I0927 12:58:18.205615   27464 userspace-boot-properties.cpp:745]   androidboot.debug.hwui.renderer=skiagl
+I0927 12:58:18.205619   27464 userspace-boot-properties.cpp:745]   androidboot.debug.sf.nobootanimation=1
+I0927 12:58:18.205622   27464 userspace-boot-properties.cpp:745]   androidboot.hardware=ranchu
+I0927 12:58:18.205625   27464 userspace-boot-properties.cpp:745]   androidboot.hardware.gltransport=pipe
+I0927 12:58:18.205629   27464 userspace-boot-properties.cpp:745]   androidboot.hardware.vulkan=ranchu
+I0927 12:58:18.205632   27464 userspace-boot-properties.cpp:745]   androidboot.logcat=*:V
+I0927 12:58:18.205635   27464 userspace-boot-properties.cpp:745]   androidboot.opengles.version=196609
+I0927 12:58:18.205639   27464 userspace-boot-properties.cpp:745]   androidboot.qemu=1
+I0927 12:58:18.205642   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.adb.pubkey=QAAAANuh6oWtjVHdTeZjdMO3BxSsCCX+o5YpNZpvOK+D0GKDc0TERCYoNCsW2kbFhc/jhJWHzQf2QF0fjUovu9HRfVPYCFPaPGx7XP2QLoHqzX5X1a9eEMRbzYe0aiY8wu6JE/MGFqMVzyA+Hy5+gb89IGzLSgQNHAVFlSONBDbD8ObFuQvndDUDIFlMLEALUcSooluYq4+lmRqCAGNUDBEN2o3JaFYQn3NFC8YLnfEIwLjvUbTfoifp6jN+y4tamyGZueZ9EE6Fqis50MAi5N6kLQino5/SjHY4qGEeMEfl7rw7jSkJjy7nQxHvsCSaExfxSujC8VTI7GB4ETJkyifuoeeL1QG8y1NK3e/eKSh/bfNrZRVep835Ly3UFEELV2IoYY60+NgMu8OvfTOnlbb/amMsSOz1zrlNeTfxBSRpAcaK1f7pEcb175YikSnrm8WqhDFvXo4JOt2h2CT3crkduAspYnRlNz4vau6n1BwH5rN6mLo9BzrT5gBpdDB8n6vsoCJmR4Zy7wq2Ro1Z/YcqPwHR75qkUbmz/nH6rqMEIReLqG9xJ1YSS+GXshmK93E+vGDpzc38X8xOj1MMX9TsFaQpIAbJItwgCsgs4vv9E4HtIQd/EfD1mxRnvZPehqu6gfD7TVAEcpYZGbRoTdBJB4OBG3vBunx/SHjTqtMgGTQBCdiduQEAAQA= @unknown
+I0927 12:58:18.205647   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.avd_name=Medium_Phone
+I0927 12:58:18.205650   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.camera_hq_edge_processing=0
+I0927 12:58:18.205654   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.camera_protocol_ver=1
+I0927 12:58:18.205659   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.cpuvulkan.version=4202496
+I0927 12:58:18.205663   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.gltransport.drawFlushInterval=800
+I0927 12:58:18.205668   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.gltransport.name=pipe
+I0927 12:58:18.205672   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.hwcodec.avcdec=2
+I0927 12:58:18.205675   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.hwcodec.hevcdec=2
+I0927 12:58:18.205679   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.hwcodec.vpxdec=2
+I0927 12:58:18.205682   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.settings.system.screen_off_timeout=2147483647
+I0927 12:58:18.205685   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.virtiowifi=1
+I0927 12:58:18.205689   27464 userspace-boot-properties.cpp:745]   androidboot.qemu.vsync=60
+I0927 12:58:18.205693   27464 userspace-boot-properties.cpp:745]   androidboot.serialno=EMULATOR35X5X10X0
+I0927 12:58:18.205696   27464 userspace-boot-properties.cpp:745]   androidboot.vbmeta.digest=c3fec574c004d42a1ba9007bad5d0e4e9018afeb9ec9c0424f1a6b4f033003fb
+I0927 12:58:18.205700   27464 userspace-boot-properties.cpp:745]   androidboot.vbmeta.hash_alg=sha256
+I0927 12:58:18.205743   27464 userspace-boot-properties.cpp:745]   androidboot.vbmeta.size=6720
+I0927 12:58:18.205749   27464 userspace-boot-properties.cpp:745]   androidboot.veritymode=enforcing
+        | SharedLibrary::open for [vulkan-1.dll] (win32): call LoadLibraryA
+
+INFO         | SharedLibrary::open succeeded for [vulkan-1.dll]. File name: [C:\WINDOWS\SYSTEM32\vulkan-1.dll]
+
+INFO         | Added library: vulkan-1.dll
+INFO         | Selecting Vulkan device: NVIDIA GeForce MX550, Version: 1.4.329
+INFO         | SharedLibrary::open for [opengl32.dll]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [opengl32.dll] (win32): call LoadLibraryA
+
+INFO         | SharedLibrary::open succeeded for [opengl32.dll]. File name: [C:\WINDOWS\SYSTEM32\opengl32.DLL]
+
+INFO         | SharedLibrary::open for [libshadertranslator.dll]: not found in map, open for the first time
+
+INFO         | SharedLibrary::open for [libshadertranslator.dll] (win32): call LoadLibraryA
+
+INFO         | SharedLibrary::open succeeded for [libshadertranslator.dll]. File name: [C:\Users\admin\AppData\Local\Android\Sdk\emulator\lib64\libshadertranslator.dll]
+
+INFO         | Initializing VkEmulation features:
+INFO         |     glInteropSupported: true
+INFO         |     useDeferredCommands: true
+INFO         |     createResourceWithRequirements: true
+INFO         |     useVulkanComposition: false
+INFO         |     useVulkanNativeSwapchain: false
+INFO         |     enable guestRenderDoc: false
+INFO         |     ASTC LDR emulation mode: 2
+INFO         |     enable ETC2 emulation: true
+INFO         |     enable Ycbcr emulation: false
+INFO         |     guestVulkanOnly: false
+INFO         |     useDedicatedAllocations: false
+INFO         | Graphics Adapter Vendor Google (NVIDIA Corporation)
+INFO         | Graphics Adapter Android Emulator OpenGL ES Translator (NVIDIA GeForce MX550/PCIe/SSE2)
+INFO         | Graphics API Version OpenGL ES 3.0 (4.5.0 NVIDIA 595.95)
+INFO         | Graphics API Extensions GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_packed_depth_stencil GL_OES_vertex_half_float GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_OVR_multiview2 GL_EXT_multiview_texture_multisample GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 GL_EXT_texture_buffer 
+INFO         | Graphics Device Extensions N/A
+INFO         | Sending adb public key [QAAAANuh6oWtjVHdTeZjdMO3BxSsCCX+o5YpNZpvOK+D0GKDc0TERCYoNCsW2kbFhc/jhJWHzQf2QF0fjUovu9HRfVPYCFPaPGx7XP2QLoHqzX5X1a9eEMRbzYe0aiY8wu6JE/MGFqMVzyA+Hy5+gb89IGzLSgQNHAVFlSONBDbD8ObFuQvndDUDIFlMLEALUcSooluYq4+lmRqCAGNUDBEN2o3JaFYQn3NFC8YLnfEIwLjvUbTfoifp6jN+y4tamyGZueZ9EE6Fqis50MAi5N6kLQino5/SjHY4qGEeMEfl7rw7jSkJjy7nQxHvsCSaExfxSujC8VTI7GB4ETJkyifuoeeL1QG8y1NK3e/eKSh/bfNrZRVep835Ly3UFEELV2IoYY60+NgMu8OvfTOnlbb/amMsSOz1zrlNeTfxBSRpAcaK1f7pEcb175YikSnrm8WqhDFvXo4JOt2h2CT3crkduAspYnRlNz4vau6n1BwH5rN6mLo9BzrT5gBpdDB8n6vsoCJmR4Zy7wq2Ro1Z/YcqPwHR75qkUbmz/nH6rqMEIReLqG9xJ1YSS+GXshmK93E+vGDpzc38X8xOj1MMX9TsFaQpIAbJItwgCsgs4vv9E4HtIQd/EfD1mxRnvZPehqu6gfD7TVAEcpYZGbRoTdBJB4OBG3vBunx/SHjTqtMgGTQBCdiduQEAAQA= @unknown]
+WHPX on Windows 10.0.26200 detected.
+Windows Hypervisor Platform accelerator is operational
+netsimd I 09-27 07:28:18.292 daemon\src\rust_main.rs:98 - netsim artifacts path: "C:\\Users\\admin\\AppData\\Local\\Temp\\netsimd"
+netsimd I 09-27 07:28:18.292 daemon\src\rust_main.rs:101 - NetsimdArgs {
+    fd_startup_str: None,
+    no_cli_ui: true,
+    no_web_ui: true,
+    pcap: false,
+    disable_address_reuse: false,
+    hci_port: None,
+    connector_instance: None,
+    instance: None,
+    logtostderr: false,
+    dev: false,
+    forward_host_mdns: false,
+    vsock: None,
+    config: None,
+    host_dns: Some(
+        "192.168.1.1",
+    ),
+    http_proxy: None,
+    wifi_tap: None,
+    wifi: None,
+    test_beacons: false,
+    no_test_beacons: false,
+    no_shutdown: false,
+    verbose: false,
+    version: false,
+}
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 0]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 2]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 3]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 4]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 5]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 6]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 7]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 8]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 9]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 13]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 15]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 16]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 23]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 24]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 0]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 2]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 3]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 4]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 5]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 6]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 7]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 8]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 9]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 13]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 15]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 16]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 23]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 24]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 0]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 2]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 3]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 4]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 5]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 6]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 7]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 8]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 9]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 13]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 15]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 16]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 23]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 24]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 0]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 2]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 3]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 4]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 5]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 6]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 7]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 8]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 9]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 13]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 15]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 16]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 23]
+host doesn't support requested feature: CPUID.80000001H:EDX [bit 24]
+INFO         | Monitoring duration of emulator setup.
+WARNING      | The emulator now requires a signed jwt token for gRPC access! Use the -grpc flag if you really want an open unprotected grpc port
+INFO         | Using security allow list from: C:\Users\admin\AppData\Local\Android\Sdk\emulator\lib\emulator_access.json
+WARNING      | *** Basic token auth should only be used by android-studio ***
+INFO         | The active JSON Web Key Sets can be found here: C:\Users\admin\AppData\Local\Temp\avd\running\3944\jwks\bfc22c22-0e6d-46e1-8adf-e3c17ad9b480\active.jwk
+INFO         | Scanning C:\Users\admin\AppData\Local\Temp\avd\running\3944\jwks\bfc22c22-0e6d-46e1-8adf-e3c17ad9b480 for jwk keys.
+INFO         | Started GRPC server at 127.0.0.1:8554, security: Local, auth: +token
+INFO         | Advertising in: C:\Users\admin\AppData\Local\Temp\avd\running\pid_3944.ini
+INFO         | Setting display: 0 configuration to: 1080x2400, dpi: 420x420 
+INFO         | setDisplayActiveConfig 0
+INFO         | Checking system compatibility:
+INFO         |   Checking: hasCompatibleHypervisor
+INFO         |      Ok: Hypervisor compatibility to run avd: `Medium_Phone` are met
+INFO         |   Checking: hasSufficientSystem
+INFO         |      Ok: System requirements to run avd: `Medium_Phone` are met
+INFO         |   Checking: hasSufficientHwGpu
+INFO         |      Ok: Hardware GPU requirements to run avd: `Medium_Phone` are passed
+INFO         |   Checking: hasSufficientDiskSpace
+INFO         |      Ok: Disk space requirements to run avd: `Medium_Phone` are met
+WARNING      | adb command 'C:\Users\admin\AppData\Local\Android\Sdk\platform-tools\adb.exe -e shell am start-foreground-service -e meter on com.android.emulator.radio.config/.MeterService ' failed: 'adb.exe: device offline'
+INFO         | Loading snapshot 'default_boot'...
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Unknown XR viewport mode requested: 0, ignored.
+
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+WARNING      | Client not connected yet. Ignoring message!
+INFO         | Successfully loaded snapshot 'default_boot'
+INFO         | Activated packet streamer for uwb emulation
+INFO         | Activated packet streamer for bluetooth emulation
+INFO         | Created VkInstance:0000029C77ED1D60 for application: engine:.
+INFO         | Destroyed VkInstance:0000029C77ED1D60 for application: engine:.
+INFO         | Created VkInstance:0000029B11F0ADF0 for application: engine:.
+INFO         | Destroyed VkInstance:0000029B11F0ADF0 for application: engine:.
+INFO         | Created VkInstance:0000029B1BCA3B90 for application: engine:.
+INFO         | Destroyed VkInstance:0000029B1BCA3B90 for application: engine:.

@@ -8,6 +8,7 @@ import type {
   MlSignalSummary,
   PatternStatus,
 } from '../engine/patternEngine';
+import type { ModelRuntimeStatus } from '../ml/modelStatus';
 import type { TrainedTriggerLabel } from '../ml/triggerClassifier';
 
 /** How many stored events the "Recent activity" section shows. */
@@ -138,4 +139,33 @@ export function buildMlSignalSummaries(
     headline: `This signal appeared in ${summary.occurrenceCount} recorded ${summary.occurrenceCount === 1 ? 'event' : 'events'}.`,
     detail: `Model-emitted signal from text you entered. Highest confidence: ${formatConfidence(summary.maxConfidence)}.`,
   }));
+}
+
+/** One label/value row of the Insights "Local AI" model status card. */
+export interface ModelStatusLine {
+  label: string;
+  value: string;
+}
+
+/**
+ * Builds the compact rows of the "Local AI" status card from the runtime
+ * status. Labels are capitalized for display only; the underlying values come
+ * verbatim from ModelRuntimeStatus (no user data, no invented fields). The
+ * trained-labels row lists the exact trained labels in lowercase, matching the
+ * adapter's source of truth.
+ */
+export function buildModelStatusLines(status: ModelRuntimeStatus): ModelStatusLine[] {
+  const lines: ModelStatusLine[] = [
+    { label: 'Model', value: 'Trigger Classifier' },
+    { label: 'Runtime', value: status.runtime },
+    {
+      label: 'Labels',
+      value: `${status.trainedLabels.length} trained signals (${status.trainedLabels.join(', ')})`,
+    },
+    { label: 'Inference', value: 'On-device / Offline' },
+  ];
+  if (!status.available && status.error) {
+    lines.push({ label: 'Reason', value: status.error });
+  }
+  return lines;
 }
