@@ -3,6 +3,7 @@
 // `initializeDatabase()` creates every table the app uses and is safe to call
 // repeatedly. Every repository calls `requireDatabase()` before touching a
 // table, so no query can run against a database that was never initialized.
+import { CREATE_APP_STATE_TABLE_SQL } from './appStatePersistence';
 import { CHECK_INS_TABLE } from './checkInPersistence';
 import db from './db';
 import { initializeTableStatements } from './schemaStatements';
@@ -58,6 +59,9 @@ export function initializeDatabase(): DatabaseInitResult {
     // initialized its database before it existed needs the CREATE IF NOT EXISTS
     // here, and the statement is a no-op for fresh installs.
     db.execSync(CREATE_ML_SIGNAL_EVENTS_TABLE_SQL);
+    // The app-level state table (onboarding + Discovery Mode) ships with the
+    // onboarding pass; same reasoning as above for pre-existing dev installs.
+    db.execSync(CREATE_APP_STATE_TABLE_SQL);
     initialized = true;
     return { ok: true };
   } catch (error) {

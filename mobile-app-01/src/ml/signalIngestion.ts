@@ -46,9 +46,16 @@ export interface TextSignalIngestResult {
  * Runs user-provided text through the full local boundary.
  *
  * Order is fixed and auditable:
+ *   0. monitoring kill switch (the user's explicit setting wins over everything),
  *   1. privacy pipeline (rejects empty/sensitive text BEFORE any model call),
  *   2. local classifier (returns probabilities for trained labels only),
  *   3. persistence of one observation row per emitted signal.
+ *
+ * `monitoringEnabled` is the Settings kill switch. It defaults to true (the
+ * product default), and when false the text is rejected BEFORE the privacy
+ * filter and any model call: no inference, no observation rows. The manual
+ * urge/check-in flows keep working — only the monitoring-derived ML pass is
+ * suppressed.
  */
 export async function ingestUserText(args: {
   readonly text: string;
@@ -56,15 +63,32 @@ export async function ingestUserText(args: {
   readonly timestamp: number;
   /** Observation storage, e.g. `saveMlSignalObservation` from the repository. */
   readonly store: MlSignalStore;
+  /** Settings kill switch; defaults to true when the caller does not pass it. */
+  readonly monitoringEnabled?: boolean;
 }): Promise<TextSignalIngestResult> {
   const store = args.store;
+  const monitoringEnabled = args.monitoringEnabled ?? true;
   const emptySignals: TriggerSignal[] = [];
 
+  // 0. Kill switch BEFORE the filter and any model work. The user's explicit
+  //    setting wins over every automated step below.
+  if (!monitoringEnabled) {
+    return {
+      accepted: false,
+      classified: false,
+      stored: 0,
+      signals: emptySignals,
+      stage: 'privacy',
+      reason: 'Recovery monitoring is disabled.',
+    };
+  }
+
   // 1. Privacy filter BEFORE inference. A sensitive or empty text never reaches
-  //    the tokenizer or the session.
+  //    the tokenizer or the session. The pipeline's own kill switch runs here
+  //    too, as a second independent layer.
   const pipeline = processSignal(
     { timestamp: args.timestamp, source: args.originSource, textSignal: args.text },
-    { enabled: true },
+    { enabled: monitoringEnabled },
   );
   if (!pipeline.accepted) {
     return {

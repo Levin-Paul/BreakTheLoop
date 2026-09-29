@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { loadRecentUrgeEvents, saveUrgeEvent, saveUrgeOutcome } from '../database/urgeRepository';
+import { isMonitoringEnabled } from '../database/settingsRepository';
 import type { PersistenceResult } from '../database/urgeRepository';
 import { saveMlSignalObservation } from '../database/signalRepository';
 import { ingestUserText } from '../ml/signalIngestion';
@@ -144,6 +145,7 @@ export default function UrgeScreen({ latestCheckIn, onBack }: UrgeScreenProps) {
         originSource: 'urge_flow',
         timestamp: Date.now(),
         store: saveMlSignalObservation,
+        monitoringEnabled: isMonitoringEnabled(),
       })
         .then((ingest) => {
           if (!ingest.accepted) {
