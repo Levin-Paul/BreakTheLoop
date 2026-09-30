@@ -1,0 +1,61 @@
+I0927 16:40:47.382356   27192 opengles.cpp:285] android_startOpenglesRenderer: gpu info
+I0927 16:40:47.384540   27192 opengles.cpp:286] GPU #1
+  Make: 10de
+  Model: NVIDIA GeForce MX550
+  Device ID: 1f9f
+
+I0927 16:40:47.708721   27192 userspace-boot-properties.cpp:741] Userspace boot properties:
+I0927 16:40:47.710955   27192 userspace-boot-properties.cpp:745]   androidboot.boot_devices=pci0000:00/0000:00:03.0 pci0000:00/0000:00:06.0
+I0927 16:40:47.713112   27192 userspace-boot-properties.cpp:745]   androidboot.dalvik.vm.heapsize=512m
+I0927 16:40:47.715176   27192 userspace-boot-properties.cpp:745]   androidboot.debug.hwui.renderer=skiagl
+I0927 16:40:47.715846   27192 userspace-boot-properties.cpp:745]   androidboot.hardware=ranchu
+I0927 16:40:47.716043   27192 userspace-boot-properties.cpp:745]   androidboot.hardware.gltransport=pipe
+I0927 16:40:47.716168   27192 userspace-boot-properties.cpp:745]   androidboot.hardware.vulkan=ranchu
+I0927 16:40:47.716284   27192 userspace-boot-properties.cpp:745]   androidboot.logcat=*:V
+I0927 16:40:47.716397   27192 userspace-boot-properties.cpp:745]   androidboot.opengles.version=196609
+I0927 16:40:47.716511   27192 userspace-boot-properties.cpp:745]   androidboot.qemu=1
+I0927 16:40:47.716626   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.adb.pubkey=QAAAANuh6oWtjVHdTeZjdMO3BxSsCCX+o5YpNZpvOK+D0GKDc0TERCYoNCsW2kbFhc/jhJWHzQf2QF0fjUovu9HRfVPYCFPaPGx7XP2QLoHqzX5X1a9eEMRbzYe0aiY8wu6JE/MGFqMVzyA+Hy5+gb89IGzLSgQNHAVFlSONBDbD8ObFuQvndDUDIFlMLEALUcSooluYq4+lmRqCAGNUDBEN2o3JaFYQn3NFC8YLnfEIwLjvUbTfoifp6jN+y4tamyGZueZ9EE6Fqis50MAi5N6kLQino5/SjHY4qGEeMEfl7rw7jSkJjy7nQxHvsCSaExfxSujC8VTI7GB4ETJkyifuoeeL1QG8y1NK3e/eKSh/bfNrZRVep835Ly3UFEELV2IoYY60+NgMu8OvfTOnlbb/amMsSOz1zrlNeTfxBSRpAcaK1f7pEcb175YikSnrm8WqhDFvXo4JOt2h2CT3crkduAspYnRlNz4vau6n1BwH5rN6mLo9BzrT5gBpdDB8n6vsoCJmR4Zy7wq2Ro1Z/YcqPwHR75qkUbmz/nH6rqMEIReLqG9xJ1YSS+GXshmK93E+vGDpzc38X8xOj1MMX9TsFaQpIAbJItwgCsgs4vv9E4HtIQd/EfD1mxRnvZPehqu6gfD7TVAEcpYZGbRoTdBJB4OBG3vBunx/SHjTqtMgGTQBCdiduQEAAQA= @unknown
+I0927 16:40:47.716744   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.avd_name=Medium_Phone
+I0927 16:40:47.716867   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.camera_hq_edge_processing=0
+I0927 16:40:47.716988   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.camera_protocol_ver=1
+I0927 16:40:47.717097   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.cpuvulkan.version=4202496
+I0927 16:40:47.717205   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.gltransport.drawFlushInterval=800
+I0927 16:40:47.717311   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.gltransport.name=pipe
+I0927 16:40:47.717416   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.hwcodec.avcdec=2
+I0927 16:40:47.717522   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.hwcodec.hevcdec=2
+I0927 16:40:47.717630   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.hwcodec.vpxdec=2
+I0927 16:40:47.717737   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.settings.system.screen_off_timeout=2147483647
+I0927 16:40:47.717845   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.virtiowifi=1
+I0927 16:40:47.717969   27192 userspace-boot-properties.cpp:745]   androidboot.qemu.vsync=60
+I0927 16:40:47.718084   27192 userspace-boot-properties.cpp:745]   androidboot.serialno=EMULATOR35X5X10X0
+I0927 16:40:47.718190   27192 userspace-boot-properties.cpp:745]   androidboot.vbmeta.digest=c3fec574c004d42a1ba9007bad5d0e4e9018afeb9ec9c0424f1a6b4f033003fb
+I0927 16:40:47.718297   27192 userspace-boot-properties.cpp:745]   androidboot.vbmeta.hash_alg=sha256
+I0927 16:40:47.718405   27192 userspace-boot-properties.cpp:745]   androidboot.vbmeta.size=6720
+I0927 16:40:47.718514   27192 userspace-boot-properties.cpp:745]   androidboot.veritymode=enforcing
+netsimd I 09-27 11:10:47.820 daemon\src\rust_main.rs:98 - netsim artifacts path: "C:\\Users\\admin\\AppData\\Local\\Temp\\netsimd"
+netsimd I 09-27 11:10:47.822 daemon\src\rust_main.rs:101 - NetsimdArgs {
+    fd_startup_str: None,
+    no_cli_ui: true,
+    no_web_ui: true,
+    pcap: false,
+    disable_address_reuse: false,
+    hci_port: None,
+    connector_instance: None,
+    instance: None,
+    logtostderr: false,
+    dev: false,
+    forward_host_mdns: false,
+    vsock: None,
+    config: None,
+    host_dns: Some(
+        "192.168.1.1",
+    ),
+    http_proxy: None,
+    wifi_tap: None,
+    wifi: None,
+    test_beacons: false,
+    no_test_beacons: false,
+    no_shutdown: false,
+    verbose: false,
+    version: false,
+}

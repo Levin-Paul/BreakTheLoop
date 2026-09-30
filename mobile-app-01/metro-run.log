@@ -1,1 +1,282 @@
-^CTerminate batch job (Y/N)? 
+Starting project at C:\Users\admin\Documents\BreakTheLoop\mobile-app-01
+Logs: C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\.expo\dev\logs\start.log
+Starting Metro Bundler
+
+Waiting on http://localhost:8081
+
+An update for expo is available: 57.0.24 → ~57.0.25
+0 other packages may need updating. Run npx expo install --check for details.
+Logs for your project will appear below.
+Android Bundled 3905ms index.ts (798 modules)
+ LOG  [ml] trigger classifier ready
+Android Bundled 147ms index.ts (1 module)
+ LOG  [ml] trigger classifier ready
+Android Bundled 114ms index.ts (1 module)
+ LOG  [ml] trigger classifier ready
+Android Bundled 114ms index.ts (1 module)
+ LOG  [ml] trigger classifier ready
+Android Bundled 85ms index.ts (1 module)
+ LOG  [ml] trigger classifier ready
+ ERROR  [TypeError: undefined is not a function]
+ ERROR  [TypeError: undefined is not a function]
+ ERROR  [TypeError: undefined is not a function]
+[31m[7m[1m ERROR [22m[27m[39m SyntaxError: C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\src\database\settingsRepository.ts: Identifier 'selectAppStateParams' has already been declared. (33:2)
+
+  31 |   SELECT_APP_STATE_SQL,
+  32 |   UPSERT_APP_STATE_SQL,
+> 33 |   selectAppStateParams,
+     |   ^
+  34 |   serializeAppState,
+  35 |   upsertAppStateParams,
+  36 | } from './appStatePersistence';
+    at constructor (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:369:19)
+    at TypeScriptParserMixin.raise (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:6622:19)
+    at TypeScriptScopeHandler.declareName (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:4884:21)
+    at TypeScriptParserMixin.declareNameFromIdentifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7590:16)
+    at TypeScriptParserMixin.checkIdentifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7586:12)
+    at TypeScriptParserMixin.checkLVal (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7523:12)
+    at TypeScriptParserMixin.finishImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14300:10)
+    at TypeScriptParserMixin.parseImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14453:17)
+    at TypeScriptParserMixin.parseImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:10171:18)
+    at TypeScriptParserMixin.parseNamedImportSpecifiers (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14432:36)
+    at TypeScriptParserMixin.parseImportSpecifiersAndAfter (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14276:37)
+    at TypeScriptParserMixin.parseImport (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14269:17)
+    at TypeScriptParserMixin.parseImport (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:9376:26)
+    at TypeScriptParserMixin.parseStatementContent (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12910:27)
+    at TypeScriptParserMixin.parseStatementContent (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:9531:18)
+    at TypeScriptParserMixin.parseStatementLike (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12801:17)
+    at TypeScriptParserMixin.parseModuleItem (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12778:17)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:13350:36)
+    at TypeScriptParserMixin.parseBlockBody (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:13343:10)
+    at TypeScriptParserMixin.parseProgram (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12656:10)
+    at TypeScriptParserMixin.parseTopLevel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12646:25)
+    at TypeScriptParserMixin.parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14522:25)
+    at TypeScriptParserMixin.parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:10149:18)
+    at parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14535:26)
+    at parser (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\parser\index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+    at normalizeFile.next (<anonymous>)
+    at run (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transformation\index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transform.js:22:33)
+    at transform.next (<anonymous>)
+    at evaluateSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\gensync\index.js:251:28)
+    at sync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\gensync\index.js:89:14)
+    at stopHiding - secret - don't use this - v1 (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\errors\rewrite-stack-trace.js:47:12)
+    at Object.transformSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transform.js:40:76)
+    at parseWithBabel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transformSync.js:75:18)
+    at transformSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transformSync.js:54:16)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\babel-transformer.js:146:58)
+    at transformJSWithBabel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\metro-transform-worker.js:495:47)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\metro-transform-worker.js:614:12)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\transform-worker.js:179:19)
+    at transformFile (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\metro\src\DeltaBundler\Worker.flow.js:67:36)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\metro\src\DeltaBundler\Worker.flow.js:42:10)
+    at execFunction (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:167:17)
+    at execHelper (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:155:5)
+    at execMethod (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:158:5)
+    at MessagePort.messageListener (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:52:7)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+[31m[7m[1m ERROR [22m[27m[39m SyntaxError: C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\src\database\settingsRepository.ts: Identifier 'selectAppStateParams' has already been declared. (33:2)
+
+  31 |   SELECT_APP_STATE_SQL,
+  32 |   UPSERT_APP_STATE_SQL,
+> 33 |   selectAppStateParams,
+     |   ^
+  34 |   serializeAppState,
+  35 |   upsertAppStateParams,
+  36 | } from './appStatePersistence';
+    at constructor (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:369:19)
+    at TypeScriptParserMixin.raise (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:6622:19)
+    at TypeScriptScopeHandler.declareName (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:4884:21)
+    at TypeScriptParserMixin.declareNameFromIdentifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7590:16)
+    at TypeScriptParserMixin.checkIdentifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7586:12)
+    at TypeScriptParserMixin.checkLVal (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7523:12)
+    at TypeScriptParserMixin.finishImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14300:10)
+    at TypeScriptParserMixin.parseImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14453:17)
+    at TypeScriptParserMixin.parseImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:10171:18)
+    at TypeScriptParserMixin.parseNamedImportSpecifiers (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14432:36)
+    at TypeScriptParserMixin.parseImportSpecifiersAndAfter (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14276:37)
+    at TypeScriptParserMixin.parseImport (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14269:17)
+    at TypeScriptParserMixin.parseImport (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:9376:26)
+    at TypeScriptParserMixin.parseStatementContent (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12910:27)
+    at TypeScriptParserMixin.parseStatementContent (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:9531:18)
+    at TypeScriptParserMixin.parseStatementLike (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12801:17)
+    at TypeScriptParserMixin.parseModuleItem (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12778:17)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:13350:36)
+    at TypeScriptParserMixin.parseBlockBody (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:13343:10)
+    at TypeScriptParserMixin.parseProgram (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12656:10)
+    at TypeScriptParserMixin.parseTopLevel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12646:25)
+    at TypeScriptParserMixin.parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14522:25)
+    at TypeScriptParserMixin.parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:10149:18)
+    at parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14535:26)
+    at parser (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\parser\index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+    at normalizeFile.next (<anonymous>)
+    at run (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transformation\index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transform.js:22:33)
+    at transform.next (<anonymous>)
+    at evaluateSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\gensync\index.js:251:28)
+    at sync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\gensync\index.js:89:14)
+    at stopHiding - secret - don't use this - v1 (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\errors\rewrite-stack-trace.js:47:12)
+    at Object.transformSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transform.js:40:76)
+    at parseWithBabel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transformSync.js:75:18)
+    at transformSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transformSync.js:54:16)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\babel-transformer.js:146:58)
+    at transformJSWithBabel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\metro-transform-worker.js:495:47)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\metro-transform-worker.js:614:12)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\transform-worker.js:179:19)
+    at transformFile (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\metro\src\DeltaBundler\Worker.flow.js:67:36)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\metro\src\DeltaBundler\Worker.flow.js:42:10)
+    at execFunction (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:167:17)
+    at execHelper (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:155:5)
+    at execMethod (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:158:5)
+    at MessagePort.messageListener (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:52:7)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+[31m[7m[1m ERROR [22m[27m[39m SyntaxError: C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\src\database\settingsRepository.ts: Identifier 'selectAppStateParams' has already been declared. (33:2)
+
+  31 |   SELECT_APP_STATE_SQL,
+  32 |   UPSERT_APP_STATE_SQL,
+> 33 |   selectAppStateParams,
+     |   ^
+  34 |   serializeAppState,
+  35 |   upsertAppStateParams,
+  36 | } from './appStatePersistence';
+    at constructor (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:369:19)
+    at TypeScriptParserMixin.raise (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:6622:19)
+    at TypeScriptScopeHandler.declareName (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:4884:21)
+    at TypeScriptParserMixin.declareNameFromIdentifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7590:16)
+    at TypeScriptParserMixin.checkIdentifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7586:12)
+    at TypeScriptParserMixin.checkLVal (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7523:12)
+    at TypeScriptParserMixin.finishImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14300:10)
+    at TypeScriptParserMixin.parseImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14453:17)
+    at TypeScriptParserMixin.parseImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:10171:18)
+    at TypeScriptParserMixin.parseNamedImportSpecifiers (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14432:36)
+    at TypeScriptParserMixin.parseImportSpecifiersAndAfter (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14276:37)
+    at TypeScriptParserMixin.parseImport (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14269:17)
+    at TypeScriptParserMixin.parseImport (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:9376:26)
+    at TypeScriptParserMixin.parseStatementContent (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12910:27)
+    at TypeScriptParserMixin.parseStatementContent (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:9531:18)
+    at TypeScriptParserMixin.parseStatementLike (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12801:17)
+    at TypeScriptParserMixin.parseModuleItem (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12778:17)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:13350:36)
+    at TypeScriptParserMixin.parseBlockBody (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:13343:10)
+    at TypeScriptParserMixin.parseProgram (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12656:10)
+    at TypeScriptParserMixin.parseTopLevel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12646:25)
+    at TypeScriptParserMixin.parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14522:25)
+    at TypeScriptParserMixin.parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:10149:18)
+    at parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14535:26)
+    at parser (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\parser\index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+    at normalizeFile.next (<anonymous>)
+    at run (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transformation\index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transform.js:22:33)
+    at transform.next (<anonymous>)
+    at evaluateSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\gensync\index.js:251:28)
+    at sync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\gensync\index.js:89:14)
+    at stopHiding - secret - don't use this - v1 (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\errors\rewrite-stack-trace.js:47:12)
+    at Object.transformSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transform.js:40:76)
+    at parseWithBabel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transformSync.js:75:18)
+    at transformSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transformSync.js:54:16)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\babel-transformer.js:146:58)
+    at transformJSWithBabel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\metro-transform-worker.js:495:47)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\metro-transform-worker.js:614:12)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\transform-worker.js:179:19)
+    at transformFile (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\metro\src\DeltaBundler\Worker.flow.js:67:36)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\metro\src\DeltaBundler\Worker.flow.js:42:10)
+    at execFunction (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:167:17)
+    at execHelper (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:155:5)
+    at execMethod (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:158:5)
+    at MessagePort.messageListener (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:52:7)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+[31m[7m[1m ERROR [22m[27m[39m SyntaxError: C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\src\database\settingsRepository.ts: Identifier 'selectAppStateParams' has already been declared. (33:2)
+
+  31 |   SELECT_APP_STATE_SQL,
+  32 |   UPSERT_APP_STATE_SQL,
+> 33 |   selectAppStateParams,
+     |   ^
+  34 |   serializeAppState,
+  35 |   upsertAppStateParams,
+  36 | } from './appStatePersistence';
+    at constructor (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:369:19)
+    at TypeScriptParserMixin.raise (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:6622:19)
+    at TypeScriptScopeHandler.declareName (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:4884:21)
+    at TypeScriptParserMixin.declareNameFromIdentifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7590:16)
+    at TypeScriptParserMixin.checkIdentifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7586:12)
+    at TypeScriptParserMixin.checkLVal (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:7523:12)
+    at TypeScriptParserMixin.finishImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14300:10)
+    at TypeScriptParserMixin.parseImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14453:17)
+    at TypeScriptParserMixin.parseImportSpecifier (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:10171:18)
+    at TypeScriptParserMixin.parseNamedImportSpecifiers (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14432:36)
+    at TypeScriptParserMixin.parseImportSpecifiersAndAfter (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14276:37)
+    at TypeScriptParserMixin.parseImport (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14269:17)
+    at TypeScriptParserMixin.parseImport (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:9376:26)
+    at TypeScriptParserMixin.parseStatementContent (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12910:27)
+    at TypeScriptParserMixin.parseStatementContent (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:9531:18)
+    at TypeScriptParserMixin.parseStatementLike (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12801:17)
+    at TypeScriptParserMixin.parseModuleItem (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12778:17)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:13350:36)
+    at TypeScriptParserMixin.parseBlockBody (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:13343:10)
+    at TypeScriptParserMixin.parseProgram (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12656:10)
+    at TypeScriptParserMixin.parseTopLevel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:12646:25)
+    at TypeScriptParserMixin.parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14522:25)
+    at TypeScriptParserMixin.parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:10149:18)
+    at parse (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\parser\lib\index.js:14535:26)
+    at parser (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\parser\index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+    at normalizeFile.next (<anonymous>)
+    at run (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transformation\index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transform.js:22:33)
+    at transform.next (<anonymous>)
+    at evaluateSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\gensync\index.js:251:28)
+    at sync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\gensync\index.js:89:14)
+    at stopHiding - secret - don't use this - v1 (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\errors\rewrite-stack-trace.js:47:12)
+    at Object.transformSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\@babel\core\lib\transform.js:40:76)
+    at parseWithBabel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transformSync.js:75:18)
+    at transformSync (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transformSync.js:54:16)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\babel-transformer.js:146:58)
+    at transformJSWithBabel (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\metro-transform-worker.js:495:47)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\metro-transform-worker.js:614:12)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\expo\node_modules\@expo\metro-config\build\transform-worker\transform-worker.js:179:19)
+    at transformFile (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\metro\src\DeltaBundler\Worker.flow.js:67:36)
+    at Object.transform (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\metro\src\DeltaBundler\Worker.flow.js:42:10)
+    at execFunction (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:167:17)
+    at execHelper (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:155:5)
+    at execMethod (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:158:5)
+    at MessagePort.messageListener (C:\Users\admin\Documents\BreakTheLoop\mobile-app-01\node_modules\jest-worker\build\workers\threadChild.js:52:7)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+ ERROR  [TypeError: undefined is not a function]
+ ERROR  [TypeError: undefined is not a function]
+Unable to resolve "../settings/privacyCopy" from "src\screens\Settings.tsx"
+[0m [90m 16 |[39m   [33mWHAT_IS_STORED[39m[33m,[39m
+ [90m 17 |[39m   retentionSummary[33m,[39m
+[31m[1m>[22m[39m[90m 18 |[39m } [36mfrom[39m [32m'../settings/privacyCopy'[39m[33m;[39m
+ [90m    |[39m         [31m[1m^[22m[39m
+ [90m 19 |[39m [36mimport[39m type { [33mPersistenceResult[39m } [36mfrom[39m [32m'../database/schema'[39m[33m;[39m
+ [90m 20 |[39m
+ [90m 21 |[39m [36mconst[39m [33mDELETE_CONFIRM_TITLE[39m [33m=[39m [32m'Delete all recovery data?'[39m[33m;[39m[0m
+
+Import stack:
+
+ src\screens\Settings.tsx
+ | import "../settings/privacyCopy"
+
+ App.tsx
+ | import "./src/screens/Settings"
+
+ 
+ | import "./App"
+
+ ERROR  [TypeError: undefined is not a function]
+ ERROR  [ReferenceError: Property 'pruneOldMlSignals' doesn't exist]
