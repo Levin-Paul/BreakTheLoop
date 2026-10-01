@@ -23,6 +23,8 @@ interface HomeScreenProps {
   onStartCheckIn: () => void;
   /** Navigates to the Urge screen. */
   onStartUrge: () => void;
+  /** Navigates to the Relapse (record + post-lapse recovery) flow. */
+  onRecordRelapse: () => void;
   /** Navigates to the Insights screen. */
   onOpenInsights: () => void;
   /** Navigates to the Settings screen. */
@@ -58,6 +60,7 @@ export default function HomeScreen({
   onDiscoveryToggle,
   onStartCheckIn,
   onStartUrge,
+  onRecordRelapse,
   onOpenInsights,
   onOpenSettings,
   onOpenScreenCaptureTest,
@@ -204,6 +207,14 @@ export default function HomeScreen({
       </Pressable>
 
       <Pressable
+        onPress={onRecordRelapse}
+        accessibilityRole="button"
+        accessibilityLabel="Record a relapse"
+        style={styles.relapseButton}>
+        <Text style={styles.relapseButtonText}>Record a Relapse</Text>
+      </Pressable>
+
+      <Pressable
         onPress={onOpenInsights}
         accessibilityRole="button"
         accessibilityLabel="Open insights"
@@ -289,6 +300,19 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 40,
     alignItems: 'center',
+  },
+  relapseButton: {
+    backgroundColor: '#243141',
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 40,
+    alignItems: 'center',
+    marginTop: 14,
+  },
+  relapseButtonText: {
+    color: '#e2e8f0',
+    fontSize: 15,
+    fontWeight: '600',
   },
   primaryButtonText: {
     color: '#052e16',

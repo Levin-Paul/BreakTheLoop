@@ -28,6 +28,10 @@ export const WHAT_IS_STORED: readonly PrivacyCopyItem[] = [
     body: 'Check-ins, urge episodes (including the intervention shown and your outcome), and the notes you type on them.',
   },
   {
+    label: 'Relapse records',
+    body: 'When you record a relapse: the time, the place type (for example "home alone"), whether a trigger was noticed, and an optional note you choose to write. Nothing explicit is ever required.',
+  },
+  {
     label: 'Learned patterns',
     body: 'Counts of repeated sequences the Pattern Engine finds in your stored events — computed on this device.',
   },
@@ -70,13 +74,13 @@ export const PRIVACY_LINES: readonly string[] = [
 export function retentionSummary(signalRetentionDays: number): string {
   return (
     `Automated monitoring signal records are pruned after ${signalRetentionDays} days. ` +
-    'Your check-ins, urges, and other recovery history are never deleted automatically.'
+    'Your check-ins, urges, relapse records, and other recovery history are never deleted automatically.'
   );
 }
 
 /** Delete-all confirmation dialog copy (title + body + buttons). */
 export const DELETE_CONFIRM_TITLE = 'Delete all recovery data?';
 export const DELETE_CONFIRM_BODY =
-  'This permanently removes your local check-ins, urges, journal entries, relapse history, interventions, learned patterns, and locally stored recovery signals.\n\nThis cannot be undone.';
+  'This permanently removes your local check-ins, urges, relapse records, journal entries, interventions, learned patterns, and locally stored recovery signals.\n\nThis cannot be undone.';
 export const DELETE_CONFIRM_ACTION = 'Delete everything';
 export const DELETE_CONFIRM_CANCEL = 'Cancel';

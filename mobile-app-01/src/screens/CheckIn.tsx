@@ -23,6 +23,8 @@ const DISCLAIMER =
 interface CheckInScreenProps {
   /** Session-local check-ins, oldest first. Used for the recent signals. */
   history: readonly CheckInRecord[];
+  /** True when a relapse was recorded in `relapse_events` inside the recent window. */
+  storedRelapseInWindow?: boolean;
   /** Saves the check-in to session-local state. */
   onSubmit: (checkIn: CheckInRecord) => void;
   /** Returns to the Home screen. */
@@ -65,7 +67,7 @@ function ScaleInput({
   );
 }
 
-export default function CheckInScreen({ history, onSubmit, onBack }: CheckInScreenProps) {
+export default function CheckInScreen({ history, storedRelapseInWindow = false, onSubmit, onBack }: CheckInScreenProps) {
   const [mood, setMood] = useState(7);
   const [urge, setUrge] = useState(3);
   const [energy, setEnergy] = useState(6);
@@ -81,8 +83,9 @@ export default function CheckInScreen({ history, onSubmit, onBack }: CheckInScre
     const checkIn = createCheckIn(draft);
 
     // Recent signals are derived from the earlier check-ins only; this check-in
-    // is scored directly by the engine's own rules.
-    const input = toRecoveryInput(checkIn, history);
+    // is scored directly by the engine's own rules. A relapse recorded in the
+    // relapse flow within the recent window is part of the signal too.
+    const input = toRecoveryInput(checkIn, history, storedRelapseInWindow);
 
     setSignals(input);
     setResult(calculateRecoveryState(input));

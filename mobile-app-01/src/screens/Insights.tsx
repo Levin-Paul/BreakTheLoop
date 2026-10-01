@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { countCheckIns, loadRecentCheckIns } from '../database/checkInRepository';
+import { countRelapses, loadRecentRelapses } from '../database/relapseRepository';
 import { initializeDatabase } from '../database/schema';
 import {
   countCompletedInterventions,
@@ -23,6 +24,7 @@ import {
   buildMlSignalSummaries,
   buildRecentActivity,
   buildModelStatusLines,
+  buildRelapseInsights,
   formatConfidence,
   formatDateRange,
   formatStoredTimestamp,
@@ -41,6 +43,8 @@ interface InsightsState {
   urges: number;
   interventions: number;
   mlSignals: number;
+  relapses: number;
+  relapseSummary: ReturnType<typeof buildRelapseInsights>;
   activity: ActivityEntry[];
   patterns: DetectedPattern[];
   mlSummaries: ReturnType<typeof buildMlSignalSummaries>;
@@ -52,6 +56,8 @@ const EMPTY: Omit<InsightsState, 'status' | 'error'> = {
   urges: 0,
   interventions: 0,
   mlSignals: 0,
+  relapses: 0,
+  relapseSummary: buildRelapseInsights([], Date.now()),
   activity: [],
   patterns: [],
   mlSummaries: [],
@@ -74,18 +80,22 @@ export default function InsightsScreen({ onBack }: InsightsScreenProps) {
     const urgeCount = countUrges();
     const interventionCount = countCompletedInterventions();
     const mlSignalCount = countMlSignalObservations();
+    const relapseCount = countRelapses();
     // Patterns need more history than the activity list, so a larger (still
     // bounded) read is used and the activity list slices its own limit.
     const checkInHistory = loadRecentCheckIns(PATTERN_HISTORY_LIMIT);
     const urgeHistory = loadRecentUrgeEvents(PATTERN_HISTORY_LIMIT);
     const mlSignalHistory = loadRecentMlSignals(PATTERN_HISTORY_LIMIT);
+    const relapseHistory = loadRecentRelapses(PATTERN_HISTORY_LIMIT);
 
     const error = [
       checkInCount.error,
       urgeCount.error,
       interventionCount.error,
+      relapseCount.error,
       checkInHistory.error,
       urgeHistory.error,
+      relapseHistory.error,
       // ML signals are additive; a failure here degrades only this section.
       mlSignalCount.error,
       mlSignalHistory.error,
@@ -97,13 +107,16 @@ export default function InsightsScreen({ onBack }: InsightsScreenProps) {
       checkIns: checkInCount.count,
       urges: urgeCount.count,
       interventions: interventionCount.count,
+      relapses: relapseCount.count,
+      relapseSummary: buildRelapseInsights(relapseHistory.relapses, Date.now()),
       activity: buildRecentActivity(
         checkInHistory.checkIns,
         urgeHistory.events,
+        relapseHistory.relapses,
         RECENT_ACTIVITY_LIMIT,
       ),
       // Detected only from rows actually stored on this device.
-      patterns: detectPatterns(checkInHistory.checkIns, urgeHistory.events),
+      patterns: detectPatterns(checkInHistory.checkIns, urgeHistory.events, relapseHistory.relapses),
       mlSignals: mlSignalCount.count,
       // ML-derived signals come from their own table and are summarized with
       // the same counting rules — no invention, no causal wording.
@@ -146,6 +159,10 @@ export default function InsightsScreen({ onBack }: InsightsScreenProps) {
         <View style={styles.countRow}>
           <Text style={styles.countLabel}>Interventions:</Text>
           <Text style={styles.countValue}>{state.interventions}</Text>
+        </View>
+        <View style={styles.countRow}>
+          <Text style={styles.countLabel}>Relapses recorded:</Text>
+          <Text style={styles.countValue}>{state.relapses}</Text>
         </View>
         <View style={styles.countRow}>
           <Text style={styles.countLabel}>ML signal events:</Text>
@@ -209,6 +226,16 @@ export default function InsightsScreen({ onBack }: InsightsScreenProps) {
           </Text>
         </View>
       )}
+
+      <Text style={styles.sectionTitle}>Relapses</Text>
+      <View style={styles.card}>
+        <Text style={styles.patternDescription}>{state.relapseSummary.headline}</Text>
+        <Text style={styles.patternMeta}>{state.relapseSummary.detail}</Text>
+        <Text style={styles.countNote}>
+          Recording a lapse never erases the progress you made. These are counts of what you
+          recorded — not a judgment, and not a prediction.
+        </Text>
+      </View>
 
       <Text style={styles.sectionTitle}>Local patterns</Text>
       {state.status !== 'ready' ? (

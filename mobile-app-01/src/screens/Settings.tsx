@@ -9,6 +9,10 @@ import {
 } from '../database/settingsRepository';
 import { deleteAllUserData } from '../database/settingsRepository';
 import {
+  DELETE_CONFIRM_ACTION,
+  DELETE_CONFIRM_BODY,
+  DELETE_CONFIRM_CANCEL,
+  DELETE_CONFIRM_TITLE,
   DISCOVERY_DESCRIPTION,
   MONITORING_EXPLANATION,
   PRIVACY_LINES,
@@ -17,12 +21,6 @@ import {
   retentionSummary,
 } from '../settings/privacyCopy';
 import type { PersistenceResult } from '../database/schema';
-
-const DELETE_CONFIRM_TITLE = 'Delete all recovery data?';
-const DELETE_CONFIRM_BODY =
-  'This permanently removes your local check-ins, urges, journal entries, relapse history, interventions, learned patterns, and locally stored recovery signals.\n\nThis cannot be undone.';
-const DELETE_CONFIRM_CONFIRM = 'Delete everything';
-const DELETE_CONFIRM_CANCEL = 'Cancel';
 
 const MONITORING_LABEL = 'Recovery monitoring';
 const ON = 'ON';
@@ -253,7 +251,7 @@ export default function SettingsScreen({
                 accessibilityLabel="Confirm deletion"
                 style={styles.modalDelete}
                 onPress={handleDeleteConfirmed}>
-                <Text style={styles.modalDeleteText}>{DELETE_CONFIRM_CONFIRM}</Text>
+                <Text style={styles.modalDeleteText}>{DELETE_CONFIRM_ACTION}</Text>
               </Pressable>
             </View>
           </View>

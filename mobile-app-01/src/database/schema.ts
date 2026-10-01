@@ -6,6 +6,7 @@
 import { CREATE_APP_STATE_TABLE_SQL } from './appStatePersistence';
 import { CHECK_INS_TABLE } from './checkInPersistence';
 import db from './db';
+import { CREATE_RELAPSE_EVENTS_TABLE_SQL, RELAPSE_EVENTS_TABLE } from './relapsePersistence';
 import { initializeTableStatements } from './schemaStatements';
 import { CREATE_ML_SIGNAL_EVENTS_TABLE_SQL, ML_SIGNAL_EVENTS_TABLE } from './signalPersistence';
 import { URGE_EVENTS_TABLE } from './urgePersistence';
@@ -62,6 +63,9 @@ export function initializeDatabase(): DatabaseInitResult {
     // The app-level state table (onboarding + Discovery Mode) ships with the
     // onboarding pass; same reasoning as above for pre-existing dev installs.
     db.execSync(CREATE_APP_STATE_TABLE_SQL);
+    // The relapse table ships with the post-lapse recovery pass; same
+    // reasoning as above for pre-existing dev installs.
+    db.execSync(CREATE_RELAPSE_EVENTS_TABLE_SQL);
     initialized = true;
     return { ok: true };
   } catch (error) {
@@ -70,7 +74,12 @@ export function initializeDatabase(): DatabaseInitResult {
 }
 
 /** Tables this app stores data in. */
-export const LOCAL_TABLES = [CHECK_INS_TABLE, URGE_EVENTS_TABLE, ML_SIGNAL_EVENTS_TABLE] as const;
+export const LOCAL_TABLES = [
+  CHECK_INS_TABLE,
+  URGE_EVENTS_TABLE,
+  ML_SIGNAL_EVENTS_TABLE,
+  RELAPSE_EVENTS_TABLE,
+] as const;
 
 /**
  * Called by every repository before it runs a statement. Throws when the

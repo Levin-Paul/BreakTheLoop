@@ -34,6 +34,10 @@ import {
 } from './appStatePersistence';
 import { rowToCheckIn, type CheckInRow } from './checkInPersistence';
 import { rowToUrgeEvent, type UrgeEventRow } from './urgePersistence';
+import {
+  rowToRelapseRecord,
+  type RelapseEventRow,
+} from './relapsePersistence';
 import { rowToMlSignalObservation, type MlSignalEventRow } from './signalPersistence';
 import { requireDatabase, type PersistenceResult } from './schema';
 
@@ -120,7 +124,7 @@ export interface DeleteAllResult extends PersistenceResult {
  *
  *   BEGIN
  *     DELETE FROM every user-data table (check_ins, urge_events,
- *     ml_signal_events, app_state)
+ *     ml_signal_events, relapse_events, app_state)
  *     SELECT COUNT(*) per table  <- must all be 0, otherwise ROLLBACK
  *   COMMIT
  *
@@ -178,6 +182,10 @@ export function buildExportPayload(): { ok: boolean; data?: ExportPayload; error
       'SELECT id, created_at, label, confidence, source, origin_source, model_id, model_version FROM ml_signal_events ORDER BY created_at ASC',
       [],
     );
+    const relapseRows = db.getAllSync<RelapseEventRow>(
+      'SELECT id, created_at, environment, trigger_noticed, note, check_in_at, check_in_mood, check_in_stress, check_in_urge FROM relapse_events ORDER BY created_at ASC',
+      [],
+    );
     const settings = loadSettingsOrDefaults();
     return {
       ok: true,
@@ -189,6 +197,7 @@ export function buildExportPayload(): { ok: boolean; data?: ExportPayload; error
         },
         checkIns: checkInRows.map(rowToCheckIn),
         urgeEvents: urgeRows.map(rowToUrgeEvent),
+        relapseEvents: relapseRows.map(rowToRelapseRecord),
         mlSignals: signalRows.map(rowToMlSignalObservation),
       }),
     };

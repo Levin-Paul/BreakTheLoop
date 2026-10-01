@@ -38,6 +38,12 @@ import {
   insertMlSignalParams,
   rowToMlSignalObservation,
 } from '../database/signalPersistence';
+import {
+  CREATE_RELAPSE_EVENTS_TABLE_SQL,
+  INSERT_RELAPSE_EVENT_SQL,
+  insertRelapseParams,
+} from '../database/relapsePersistence';
+import type { RelapseRecord } from '../screens/relapseModel';
 import type { UrgeEffectiveness } from '../screens/urgeModel';
 import {
   DELETE_OLD_SIGNALS_SQL,
@@ -83,6 +89,7 @@ function openDatabase(): DatabaseSync {
   database.exec(CREATE_CHECK_INS_TABLE_SQL);
   database.exec(CREATE_URGE_EVENTS_TABLE_SQL);
   database.exec(CREATE_ML_SIGNAL_EVENTS_TABLE_SQL);
+  database.exec(CREATE_RELAPSE_EVENTS_TABLE_SQL);
   return database;
 }
 
@@ -119,6 +126,20 @@ function sampleSignal(id: string, at: string): MlSignalObservation {
     originSource: 'urge_flow',
     modelId: 'trigger-classifier',
     modelVersion: 'test-1',
+  };
+}
+
+function sampleRelapse(id: string, createdAt: string): RelapseRecord {
+  return {
+    id,
+    createdAt,
+    environment: 'home_alone',
+    triggerNoticed: true,
+    note: '',
+    checkInAt: null,
+    checkInMood: null,
+    checkInStress: null,
+    checkInUrge: null,
   };
 }
 
@@ -215,8 +236,9 @@ async function main(): Promise<void> {
   check('delete-all: covers check_ins', tables.includes('check_ins'), tables.join(','));
   check('delete-all: covers urge_events', tables.includes('urge_events'), tables.join(','));
   check('delete-all: covers ml_signal_events', tables.includes('ml_signal_events'), tables.join(','));
+  check('delete-all: covers relapse_events', tables.includes('relapse_events'), tables.join(','));
   check('delete-all: covers app_state', tables.includes('app_state'), tables.join(','));
-  assertEqual('delete-all: exactly four tables', tables.length, 4);
+  assertEqual('delete-all: exactly five tables', tables.length, 5);
   check(
     'delete-all: statements are plain DELETEs (schema untouched)',
     deleteAllUserDataStatements().every((sql: string) => /^DELETE FROM \w+;?$/.test(sql)),
@@ -237,6 +259,7 @@ async function main(): Promise<void> {
   deleteDb.prepare(INSERT_CHECK_IN_SQL).run(...insertCheckInParams(sampleCheckIn('c2', '2026-09-02T00:00:00.000Z')));
   deleteDb.prepare(INSERT_URGE_EVENT_SQL).run(...insertUrgeParams(sampleUrge('u1', '2026-09-01T00:00:00.000Z')));
   deleteDb.prepare(INSERT_ML_SIGNAL_EVENT_SQL).run(...insertMlSignalParams(sampleSignal('s1', '2026-09-01T00:00:00.000Z')));
+  deleteDb.prepare(INSERT_RELAPSE_EVENT_SQL).run(...insertRelapseParams(sampleRelapse('rl1', '2026-09-01T00:00:00.000Z')));
   deleteDb
     .prepare(UPSERT_APP_STATE_SQL)
     .run(...upsertAppStateParams('onboarding', '{"completed":true,"completedAt":1}', '2026-09-01T00:00:00.000Z'));
@@ -256,6 +279,7 @@ async function main(): Promise<void> {
   assertEqual('delete-all: setup has check-ins', countTable(deleteDb, 'check_ins'), 2);
   assertEqual('delete-all: setup has urges', countTable(deleteDb, 'urge_events'), 1);
   assertEqual('delete-all: setup has signals', countTable(deleteDb, 'ml_signal_events'), 1);
+  assertEqual('delete-all: setup has relapses', countTable(deleteDb, 'relapse_events'), 1);
   assertEqual('delete-all: setup has app_state rows', countTable(deleteDb, 'app_state'), 3);
 
   for (const statement of deleteAllUserDataStatements()) {
@@ -273,7 +297,7 @@ async function main(): Promise<void> {
 
   // The schema itself survives deletion (tables still exist, just empty).
   let schemaIntact = true;
-  for (const table of ['check_ins', 'urge_events', 'ml_signal_events', 'app_state']) {
+  for (const table of ['check_ins', 'urge_events', 'ml_signal_events', 'relapse_events', 'app_state']) {
     try {
       countTable(deleteDb, table);
     } catch {
@@ -289,6 +313,9 @@ async function main(): Promise<void> {
   exportDb.prepare(INSERT_CHECK_IN_SQL).run(...insertCheckInParams(sampleCheckIn('c1', '2026-09-01T10:00:00.000Z')));
   exportDb.prepare(INSERT_URGE_EVENT_SQL).run(...insertUrgeParams(sampleUrge('u1', '2026-09-01T11:00:00.000Z')));
   exportDb.prepare(INSERT_ML_SIGNAL_EVENT_SQL).run(...insertMlSignalParams(sampleSignal('s1', '2026-09-01T12:00:00.000Z')));
+  exportDb
+    .prepare(INSERT_RELAPSE_EVENT_SQL)
+    .run(...insertRelapseParams(sampleRelapse('rl1', '2026-09-01T13:00:00.000Z')));
 
   // Read back through the same projections buildExportPayload uses.
   const checkInRow = exportDb
@@ -331,6 +358,7 @@ async function main(): Promise<void> {
     settings: { monitoringEnabled: true, signalRetentionDays: 30 },
     checkIns: [rowToCheckIn(checkInRow)],
     urgeEvents: [rowToUrgeEvent(urgeRow)],
+    relapseEvents: [sampleRelapse('rl1', '2026-09-01T13:00:00.000Z')],
     mlSignals: [rowToMlSignalObservation(signalRow)],
   });
 
@@ -338,6 +366,7 @@ async function main(): Promise<void> {
   assertEqual('export: app name', payload.app.name, 'Break The Loop');
   assertEqual('export: check-in count', payload.checkIns.length, 1);
   assertEqual('export: urge count', payload.urgeEvents.length, 1);
+  assertEqual('export: relapse count', payload.relapseEvents.length, 1);
   assertEqual('export: signal count', payload.mlSignalObservations.length, 1);
   assertEqual('export: check-in id', payload.checkIns[0]?.id, 'c1');
   assertEqual('export: check-in mood', payload.checkIns[0]?.mood, 4);
@@ -365,10 +394,12 @@ async function main(): Promise<void> {
     settings: { monitoringEnabled: true, signalRetentionDays: 30 },
     checkIns: [],
     urgeEvents: [],
+    relapseEvents: [],
     mlSignals: [],
   });
   assertEqual('export: empty export has no check-ins', emptyPayload.checkIns.length, 0);
   assertEqual('export: empty export has no urges', emptyPayload.urgeEvents.length, 0);
+  assertEqual('export: empty export has no relapses', emptyPayload.relapseEvents.length, 0);
   assertEqual('export: empty export has no signals', emptyPayload.mlSignalObservations.length, 0);
 
   // Privacy: no text field duplicated into ML signal exports (text lives only

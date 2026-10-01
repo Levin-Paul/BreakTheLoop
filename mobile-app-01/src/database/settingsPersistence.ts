@@ -10,6 +10,7 @@
 //
 // `settingsRepository.ts` is the thin expo-sqlite binding.
 import { APP_STATE_TABLE } from './appStatePersistence';
+import { RELAPSE_EVENTS_TABLE } from './relapsePersistence';
 
 // Re-exported so the repository (and callers) have a single import surface for
 // everything settings-related.
@@ -22,6 +23,7 @@ export {
 } from './appStatePersistence';
 import type { CheckIn } from '../screens/checkInModel';
 import type { UrgeEvent } from '../screens/urgeModel';
+import type { RelapseRecord } from '../screens/relapseModel';
 import type { MlSignalObservation } from '../engine/patternEngine';
 
 /** Fixed row key for the settings payload. */
@@ -104,10 +106,11 @@ export function parseAppSettings(raw: unknown): AppSettings {
  *   - `check_ins`          manual check-ins
  *   - `urge_events`        urge episodes incl. the intervention columns
  *   - `ml_signal_events`   automated monitoring-derived signal observations
+ *   - `relapse_events`     recorded lapses + post-lapse check-in columns
  *   - `app_state`          onboarding / Discovery Mode / settings flags
  *
  * Tables that DO NOT exist in this schema (and are therefore not listed):
- * journal_entries, relapses, interventions, intervention_results, patterns —
+ * journal_entries, interventions, intervention_results, patterns —
  * interventions live as columns on `urge_events`, and patterns are derived
  * from stored events by the Pattern Engine, never stored as rows.
  */
@@ -115,6 +118,7 @@ export const USER_DATA_TABLES = [
   'check_ins',
   'urge_events',
   'ml_signal_events',
+  RELAPSE_EVENTS_TABLE,
   APP_STATE_TABLE,
 ] as const;
 
@@ -191,10 +195,23 @@ export interface ExportedMlSignal {
   modelVersion: string;
 }
 
+/** One exported relapse record; mirrors the relapse_events columns. */
+export interface ExportedRelapseEvent {
+  id: string;
+  createdAt: string;
+  environment: string;
+  triggerNoticed: boolean;
+  note: string;
+  checkInAt: string | null;
+  checkInMood: number | null;
+  checkInStress: number | null;
+  checkInUrge: number | null;
+}
+
 /**
  * The complete export payload, built from the ACTUAL schema. Tables that do
- * not exist in this app's schema (journal_entries, relapses, intervention
- * tables, pattern rows) are deliberately absent — nothing is fabricated.
+ * not exist in this app's schema (journal_entries, intervention tables,
+ * pattern rows) are deliberately absent — nothing is fabricated.
  *
  * Deliberately NOT included anywhere in this payload: raw screen frames or
  * pixels, model weights or binaries, credentials/secrets/tokens, logs, or any
@@ -207,6 +224,7 @@ export interface ExportPayload {
   settings: { monitoringEnabled: boolean; signalRetentionDays: number };
   checkIns: ExportedCheckIn[];
   urgeEvents: ExportedUrgeEvent[];
+  relapseEvents: ExportedRelapseEvent[];
   mlSignalObservations: ExportedMlSignal[];
 }
 
@@ -220,6 +238,7 @@ export function assembleExportPayload(args: {
   readonly settings: Pick<AppSettings, 'monitoringEnabled' | 'signalRetentionDays'>;
   readonly checkIns: readonly CheckIn[];
   readonly urgeEvents: readonly UrgeEvent[];
+  readonly relapseEvents: readonly RelapseRecord[];
   readonly mlSignals: readonly MlSignalObservation[];
 }): ExportPayload {
   return {
@@ -251,6 +270,17 @@ export function assembleExportPayload(args: {
       afterIntensity: event.afterIntensity,
       effectiveness: event.effectiveness,
       outcomeAt: event.outcomeAt,
+    })),
+    relapseEvents: args.relapseEvents.map((relapse) => ({
+      id: relapse.id,
+      createdAt: relapse.createdAt,
+      environment: relapse.environment,
+      triggerNoticed: relapse.triggerNoticed,
+      note: relapse.note,
+      checkInAt: relapse.checkInAt,
+      checkInMood: relapse.checkInMood,
+      checkInStress: relapse.checkInStress,
+      checkInUrge: relapse.checkInUrge,
     })),
     mlSignalObservations: args.mlSignals.map((signal) => ({
       id: signal.id,

@@ -3,6 +3,8 @@
 // Kept free of React and of any database import so the merging and formatting can
 // be exercised directly in Node.
 import type { CheckIn } from './checkInModel';
+import type { RelapseEnvironment, RelapseRecord, RelapseWindowSummary } from './relapseModel';
+import { RELAPSE_ENVIRONMENT_LABELS, summarizeRelapseWindow } from './relapseModel';
 import { EFFECTIVENESS_LABELS, type UrgeEvent } from './urgeModel';
 import type {
   MlSignalSummary,
@@ -44,7 +46,7 @@ export function formatDateRange(first: string | null, last: string | null): stri
   return formatStoredTimestamp((last ?? first) as string);
 }
 
-export type ActivityKind = 'check_in' | 'urge';
+export type ActivityKind = 'check_in' | 'urge' | 'relapse';
 
 /** One line of the recent activity list, built only from stored values. */
 export interface ActivityEntry {
@@ -85,13 +87,23 @@ export function describeUrge(event: UrgeEvent): string {
   return `Intensity ${event.intensity} \u2192 ${event.afterIntensity} \u00b7 ${label}`;
 }
 
+/** Describes a stored relapse from its own structured values. */
+export function describeRelapse(relapse: RelapseRecord): string {
+  const environment =
+    RELAPSE_ENVIRONMENT_LABELS[relapse.environment as RelapseEnvironment] ?? 'Unknown place';
+  const trigger = relapse.triggerNoticed ? 'Trigger noticed' : 'No trigger noticed';
+  const checkIn = relapse.checkInAt !== null ? 'check-in done' : 'check-in not done';
+  return `${environment} \u00b7 ${trigger} \u00b7 ${checkIn}`;
+}
+
 /**
- * Merges stored check-ins and urges into a single newest-first list.
- * Nothing is invented here: every entry comes from a stored row.
+ * Merges stored check-ins, urges, and relapses into a single newest-first
+ * list. Nothing is invented here: every entry comes from a stored row.
  */
 export function buildRecentActivity(
   checkIns: readonly CheckIn[],
   urges: readonly UrgeEvent[],
+  relapses: readonly RelapseRecord[] = [],
   limit: number = RECENT_ACTIVITY_LIMIT,
 ): ActivityEntry[] {
   const entries: ActivityEntry[] = [
@@ -108,6 +120,13 @@ export function buildRecentActivity(
       createdAt: urge.createdAt,
       title: 'Urge',
       detail: describeUrge(urge),
+    })),
+    ...relapses.map((relapse) => ({
+      id: relapse.id,
+      kind: 'relapse' as const,
+      createdAt: relapse.createdAt,
+      title: 'Relapse',
+      detail: describeRelapse(relapse),
     })),
   ];
 
@@ -168,4 +187,19 @@ export function buildModelStatusLines(status: ModelRuntimeStatus): ModelStatusLi
     lines.push({ label: 'Reason', value: status.error });
   }
   return lines;
+}
+
+export type { RelapseWindowSummary };
+
+/**
+ * Relapse section for Insights: cautious, count-based lines over the stored
+ * rows inside the recent window. Delegates to the pure relapse model's
+ * summarizer so the wording contract lives in exactly one place. No causal
+ * claims, no raw note text, no shaming.
+ */
+export function buildRelapseInsights(
+  relapses: readonly RelapseRecord[],
+  nowMs: number,
+): RelapseWindowSummary {
+  return summarizeRelapseWindow(relapses, nowMs);
 }

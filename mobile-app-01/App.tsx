@@ -25,13 +25,23 @@ import SettingsScreen from './src/screens/Settings';
 import ScreenCaptureTestScreen from './src/screens/ScreenCaptureTest';
 import UrgeScreen from './src/screens/Urge';
 import type { CheckIn } from './src/screens/checkInModel';
+import RelapseScreen from './src/screens/Relapse';
+import { isWithinRecentWindow } from './src/screens/relapseModel';
+import { loadRecentRelapses } from './src/database/relapseRepository';
 
 // No navigation library is installed (expo-router / react-navigation would be a
 // new dependency), so the screens are switched with a single piece of app-level
 // state instead.
 // 'screenCaptureTest' is a development-only milestone screen (MediaProjection
 // foundation); it is clearly labelled inside the screen itself.
-type Screen = 'home' | 'checkIn' | 'urge' | 'insights' | 'settings' | 'screenCaptureTest';
+type Screen =
+  | 'home'
+  | 'checkIn'
+  | 'urge'
+  | 'relapse'
+  | 'insights'
+  | 'settings'
+  | 'screenCaptureTest';
 
 /**
  * Boot states, resolved before the first real screen renders:
@@ -136,18 +146,42 @@ export default function App() {
 
   const latestCheckIn = checkIns.length > 0 ? checkIns[checkIns.length - 1] : null;
 
+  /**
+   * True when a relapse was recorded on this device inside the recent window.
+   * Read fresh at each navigation (Home remounts on navigation anyway); feeds
+   * the Recovery Engine's `recentRelapse` signal in the Check-In and Urge
+   * flows. A read failure stays `false` — a failed read never invents a risk
+   * signal.
+   */
+  function hasRecentRelapse(): boolean {
+    const loaded = loadRecentRelapses(20);
+    if (!loaded.ok) return false;
+    const nowMs = Date.now();
+    return loaded.relapses.some((relapse) => isWithinRecentWindow(relapse, nowMs));
+  }
+
   function renderScreen() {
     if (screen === 'checkIn') {
       return (
         <CheckInScreen
           history={checkIns}
+          storedRelapseInWindow={hasRecentRelapse()}
           onSubmit={(checkIn) => setCheckIns((previous) => [...previous, checkIn])}
           onBack={() => setScreen('home')}
         />
       );
     }
     if (screen === 'urge') {
-      return <UrgeScreen latestCheckIn={latestCheckIn} onBack={() => setScreen('home')} />;
+      return (
+        <UrgeScreen
+          latestCheckIn={latestCheckIn}
+          storedRelapseInWindow={hasRecentRelapse()}
+          onBack={() => setScreen('home')}
+        />
+      );
+    }
+    if (screen === 'relapse') {
+      return <RelapseScreen onBack={() => setScreen('home')} />;
     }
     if (screen === 'insights') {
       return <InsightsScreen onBack={() => setScreen('home')} />;
@@ -181,6 +215,7 @@ export default function App() {
         onDiscoveryToggle={handleDiscoveryToggle}
         onStartCheckIn={() => setScreen('checkIn')}
         onStartUrge={() => setScreen('urge')}
+        onRecordRelapse={() => setScreen('relapse')}
         onOpenInsights={() => setScreen('insights')}
         onOpenSettings={() => setScreen('settings')}
         onOpenScreenCaptureTest={() => setScreen('screenCaptureTest')}

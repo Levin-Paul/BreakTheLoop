@@ -66,34 +66,40 @@ export function createCheckIn(draft: CheckInDraft, now: Date = new Date()): Chec
  *   check-in is deliberately excluded, because the engine's urge rule already
  *   scores it — counting it here would double-count a single urge event.
  * - `recentRelapse`: true when the current check-in was reported as not
- *   controlled, or when any earlier check-in in the window was. A fresh
- *   "Controlled: No" answer must still register as a relapse right away.
+ *   controlled, when any earlier check-in in the window was, or when the caller
+ *   reports a relapse stored on this device inside the recent window (the
+ *   relapse flow records lapses in `relapse_events`; a stored lapse must count
+ *   even when the user never answered "Controlled: No" on a check-in).
  */
 export function deriveRecentSignals(
   checkIn: CheckIn,
   history: readonly CheckIn[],
+  storedRelapseInWindow = false,
 ): Pick<RecoveryInput, 'recentUrgeCount' | 'recentRelapse'> {
   const earlier = history.slice(-RECENT_WINDOW_SIZE);
   return {
     recentUrgeCount: earlier.filter((entry) => entry.urge >= URGE_SIGNAL_THRESHOLD).length,
-    recentRelapse: !checkIn.controlled || earlier.some((entry) => !entry.controlled),
+    recentRelapse:
+      !checkIn.controlled || earlier.some((entry) => !entry.controlled) || storedRelapseInWindow,
   };
 }
 
 /**
  * Maps a check-in plus its *earlier* history onto `RecoveryInput`.
  * Pass the check-ins that precede `checkIn`; `checkIn` is never part of the
- * window used for recent signals.
+ * window used for recent signals. `storedRelapseInWindow` carries the relapse
+ * flow's signal (a lapse recorded within the recent window) into the engine.
  */
 export function toRecoveryInput(
   checkIn: CheckIn,
   history: readonly CheckIn[],
+  storedRelapseInWindow = false,
 ): RecoveryInput {
   return {
     urge: checkIn.urge,
     stress: checkIn.stress,
     mood: checkIn.mood,
     energy: checkIn.energy,
-    ...deriveRecentSignals(checkIn, history),
+    ...deriveRecentSignals(checkIn, history, storedRelapseInWindow),
   };
 }

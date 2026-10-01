@@ -91,15 +91,19 @@ function truncate(value: string): string {
  * - `recentUrgeCount` counts *earlier* urge episodes at or above
  *   `URGE_SIGNAL_THRESHOLD`. The urge being scored is excluded so its intensity
  *   is not counted twice (the engine's own urge rule already scores it).
- * - `recentRelapse` comes from the most recent check-in's "stayed in control"
- *   answer; the urge flow itself captures no relapse information.
+ * - `recentRelapse` is true when the most recent check-in reported losing
+ *   control OR when a relapse was recorded in `relapse_events` within the
+ *   recent window (`storedRelapseInWindow`, from the relapse flow). A stored
+ *   lapse must raise the same caution as a check-in-reported one.
  */
 export function buildUrgeInput(args: {
   intensity: number;
   earlierEvents: readonly UrgeEvent[];
   latestCheckIn: CheckIn | null;
+  /** True when a stored relapse falls inside the recent window. */
+  storedRelapseInWindow?: boolean;
 }): UrgeInputResult {
-  const { intensity, earlierEvents, latestCheckIn } = args;
+  const { intensity, earlierEvents, latestCheckIn, storedRelapseInWindow = false } = args;
   const earlier = earlierEvents.slice(-RECENT_WINDOW_SIZE);
   const recentUrgeCount = earlier.filter(
     (event) => event.intensity >= URGE_SIGNAL_THRESHOLD,
@@ -114,7 +118,8 @@ export function buildUrgeInput(args: {
       mood: latestCheckIn ? latestCheckIn.mood : NEUTRAL_BACKGROUND,
       energy: latestCheckIn ? latestCheckIn.energy : NEUTRAL_BACKGROUND,
       recentUrgeCount,
-      recentRelapse: latestCheckIn ? !latestCheckIn.controlled : false,
+      recentRelapse:
+        storedRelapseInWindow || (latestCheckIn ? !latestCheckIn.controlled : false),
     },
   };
 }

@@ -17,6 +17,7 @@
 // counted with the same honesty rules as everything else: occurrence counts and
 // neutral wording, never predictions about the user and never causal claims.
 import type { CheckIn } from '../screens/checkInModel';
+import type { RelapseRecord } from '../screens/relapseModel';
 import type { UrgeEvent } from '../screens/urgeModel';
 import type { TrainedTriggerLabel } from '../ml/triggerClassifier';
 
@@ -64,6 +65,14 @@ export const HIGH_URGE_THRESHOLD = 6;
 /** How many high urges must precede a lapse to count as a recurrence. */
 export const LAPSE_CLUSTER_MIN_URGES = 2;
 
+/**
+ * A check-in with "Controlled: No" within this distance of a stored relapse
+ * is treated as the SAME episode, not a second one — recording a lapse in the
+ * relapse flow and then answering a check-in honestly must not double-count a
+ * single event. One hour comfortably covers a post-lapse check-in.
+ */
+export const LAPSE_DEDUPLICATION_WINDOW_MS = 60 * 60 * 1000;
+
 /** How often a sequence has been seen, mapped to a promotion state. */
 export type PatternStatus = 'possible' | 'emerging' | 'recurring';
 
@@ -97,7 +106,7 @@ export interface DetectedPattern {
 interface TimelineEvent {
   at: number;
   iso: string;
-  kind: 'check_in' | 'urge';
+  kind: 'check_in' | 'urge' | 'relapse';
   distress: boolean;
   highUrge: boolean;
   lapse: boolean;
@@ -109,10 +118,17 @@ function toMillis(iso: string): number | null {
   return Number.isFinite(value) ? value : null;
 }
 
-/** Builds the chronological timeline from stored check-ins and urges. */
+/**
+ * Builds the chronological timeline from stored check-ins, urges, and
+ * relapses. Each lapse contributes at most ONE timeline event: a stored
+ * relapse row wins, and a "Controlled: No" check-in near it is treated as a
+ * note on the same episode rather than a second lapse, so pattern occurrence
+ * counts stay accurate ("relapse events do not create duplicate banners").
+ */
 export function buildTimeline(
   checkIns: readonly CheckIn[],
   urges: readonly UrgeEvent[],
+  relapses: readonly RelapseRecord[] = [],
 ): TimelineEvent[] {
   const events: TimelineEvent[] = [];
 
@@ -144,6 +160,36 @@ export function buildTimeline(
       lapse: false,
       label: `urge ${urge.intensity}`,
     });
+  }
+
+  // Deduplicate lapse episodes: a "Controlled: No" check-in within the dedup
+  // window of a stored relapse describes the same event and is demoted to a
+  // plain check-in (it still counts as distress/high-urge evidence — only the
+  // LAPSE flag is merged, never dropped from both).
+  const relapseTimes: number[] = [];
+  for (const relapse of relapses) {
+    const at = toMillis(relapse.createdAt);
+    if (at === null) continue;
+    relapseTimes.push(at);
+    events.push({
+      at,
+      iso: relapse.createdAt,
+      kind: 'relapse',
+      distress: false,
+      highUrge: false,
+      lapse: true,
+      label: 'recorded relapse',
+    });
+  }
+  for (const event of events) {
+    if (event.kind !== 'check_in' || !event.lapse) continue;
+    const nearStoredRelapse = relapseTimes.some(
+      (relapseAt) =>
+        Math.abs(event.at - relapseAt) <= LAPSE_DEDUPLICATION_WINDOW_MS,
+    );
+    if (nearStoredRelapse) {
+      event.lapse = false;
+    }
   }
 
   return events.sort((a, b) => a.at - b.at);
@@ -283,13 +329,16 @@ export function summarizeMlSignals(
  * Runs every detector over the stored events and returns the patterns that
  * actually have evidence. Strongest (most occurrences) first. Returns an empty
  * array when there is nothing repeated to report — callers must NOT fill that
- * gap with fabricated patterns.
+ * gap with fabricated patterns. Relapses join the timeline with check-in
+ * dedup, so a lapse recorded in the relapse flow AND noted on a check-in is
+ * one episode, not two.
  */
 export function detectPatterns(
   checkIns: readonly CheckIn[],
   urges: readonly UrgeEvent[],
+  relapses: readonly RelapseRecord[] = [],
 ): DetectedPattern[] {
-  const timeline = buildTimeline(checkIns, urges);
+  const timeline = buildTimeline(checkIns, urges, relapses);
   return [detectDistressBeforeHighUrge(timeline), detectUrgeClusterBeforeLapse(timeline)]
     .filter((pattern): pattern is DetectedPattern => pattern !== null)
     .sort((a, b) => b.occurrenceCount - a.occurrenceCount);

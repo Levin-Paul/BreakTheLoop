@@ -33,6 +33,8 @@ const PRIVACY_NOTE =
 interface UrgeScreenProps {
   /** Latest check-in, used for background mood/energy/stress signals. */
   latestCheckIn: CheckIn | null;
+  /** True when a relapse was recorded in `relapse_events` inside the recent window. */
+  storedRelapseInWindow?: boolean;
   /** Returns to the Home screen. */
   onBack: () => void;
 }
@@ -88,7 +90,7 @@ function PersistenceNote({ result, what }: { result: PersistenceResult | null; w
 
 type Stage = 'capture' | 'intervention' | 'recheck' | 'result';
 
-export default function UrgeScreen({ latestCheckIn, onBack }: UrgeScreenProps) {
+export default function UrgeScreen({ latestCheckIn, storedRelapseInWindow = false, onBack }: UrgeScreenProps) {
   const [stage, setStage] = useState<Stage>('capture');
 
   const [intensity, setIntensity] = useState(5);
@@ -121,7 +123,7 @@ export default function UrgeScreen({ latestCheckIn, onBack }: UrgeScreenProps) {
   }, []);
 
   function handleCapture() {
-    const derived = buildUrgeInput({ intensity, earlierEvents, latestCheckIn });
+    const derived = buildUrgeInput({ intensity, earlierEvents, latestCheckIn, storedRelapseInWindow });
     const result = calculateRecoveryState(derived.input);
     const intervention = getIntervention(result.state);
     const created = createUrgeEvent(
